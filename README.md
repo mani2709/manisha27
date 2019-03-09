@@ -1,4 +1,4 @@
-# This is Kirti
+# This is Manisha
 # books-store
 
 This is a Flask+PostgreSQL example web application for deplying on Heroku.,
