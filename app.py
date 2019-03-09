@@ -9,63 +9,119 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Book
+from models import Holiday
+
+#from models import Holiday
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Hello !"
 
 @app.route("/add")
-def add_book():
-    name=request.args.get('name')
-    author=request.args.get('author')
-    published=request.args.get('published')
+def add_holiday():
+    month=request.args.get('month')
+    date=request.args.get('date')
+    event=request.args.get('event')
     try:
-        book=Book(
-            name=name,
-            author=author,
-            published=published
+        holiday=Holiday(
+            month=month,
+            date=date,
+            event=event
         )
-        db.session.add(book)
+        db.session.add(holiday)
         db.session.commit()
-        return "Book added. book id={}".format(book.id)
+        return "Holiday added. holiday id={}".format(holiday.id)
     except Exception as e:
-	    return(str(e))
-
+        return(str(e))
+        
 @app.route("/getall")
 def get_all():
     try:
-        books=Book.query.all()
+        holidays=Holiday.query.all()
+        return render_template("list.html",holidays = holidays)
+
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
-	    return(str(e))
+        return(str(e))
 
-@app.route("/get/<id_>")
-def get_by_id(id_):
+@app.route("/get/<month_>" )
+def get_by_id(month_):
+    #req = request.get_json(silent=True, force=True)
+    #print("in comin grequest",req)
+    #action = req['queryResult']['parameters']['Holiday']
+    #month = req['queryResult']['parameters']['Months']
     try:
-        book=Book.query.filter_by(id=id_).first()
-        return jsonify(book.serialize())
+        holiday=Holiday.query.filter_by(month=month_).first()
+        print("print rows", holiday)
+        
+        return jsonify(holiday.serialize())
     except Exception as e:
-	    return(str(e))
+        return(str(e))
 
 @app.route("/add/form",methods=['GET', 'POST'])
 def add_book_form():
     if request.method == 'POST':
-        name=request.form.get('name')
-        author=request.form.get('author')
-        published=request.form.get('published')
+        month=request.form.get('month')
+        date=request.form.get('date')
+        event=request.form.get('event')
         try:
-            book=Book(
-                name=name,
-                author=author,
-                published=published
+            holiday=Holiday(
+                month=month,
+                date=date,
+                event=event
             )
-            db.session.add(book)
+            db.session.add(holiday)
             db.session.commit()
-            return "Book added. book id={}".format(book.id)
+            return "Holiday added. holiday id={}".format(holiday.id)
         except Exception as e:
             return(str(e))
     return render_template("getdata.html")
+
+@app.route("/add/form2",methods=['GET', 'POST'])
+def add_info():
+    if request.method == 'POST':
+        name=request.form.get('name')
+        address=request.form.get('address')
+        city=request.form.get('event')
+        try:
+            table=Holiday(
+                name=name,
+                address=address,
+                city=city
+            )
+            db.session.add(table)
+            db.session.commit()
+            return "Info added. info id={}".format(table.id)
+        except Exception as e:
+            return(str(e))
+    return render_template("studentdata.html")
+
+@app.route("/getdata")
+def get_data():
+    try:
+        table=Holiday.query.all()
+        return render_template("table.html",table = table)
+
+        #return  jsonify([e.serialize() for e in books])
+    except Exception as e:
+        return(str(e))
+
+
+@app.route("/get/<name_>" )
+def get_by_name(name_):
+    #req = request.get_json(silent=True, force=True)
+    #print("in comin grequest",req)
+    #action = req['queryResult']['parameters']['Holiday']
+    #month = req['queryResult']['parameters']['Months']
+    try:
+        table=Holiday.query.filter_by(name=name_).first()
+        print("print rows", table)
+        return (table)
+        return jsonify(table.serialize())
+    except Exception as e:
+        return(str(e))
+
+
 
 if __name__ == '__main__':
     app.run()
