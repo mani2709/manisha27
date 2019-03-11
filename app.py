@@ -96,8 +96,9 @@ def add_student_info():
 @app.route("/getdata")
 def get_data():
     try:
-        table=Holiday.query.all()
-        return render_template("table.html",table = table)
+        All_Holidays=Holiday.query.all()
+        All_Students=Student_Info.query.all()
+        return render_template("table.html",All_Holidays = All_Holidays,All_Students = All_Students)
 
         #return  jsonify([e.serialize() for e in books])
     except Exception as e:
