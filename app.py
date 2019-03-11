@@ -100,8 +100,8 @@ def get_data():
         All_Holidays=Holiday.query.all()
         All_Students=Student_Info.query.all()
         for row in All_Students:
-            print("All Students name -",All_Students["name"])
-            print("All Students city -",All_Students["city"])
+            print("All Students name -",row["name"])
+            print("All Students city -",row["city"])
         return render_template("list.html",All_Holidays = All_Holidays,All_Students = All_Students)
 
         #return  jsonify([e.serialize() for e in books])
