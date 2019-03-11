@@ -9,7 +9,8 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Holiday, Student_Info
+from models import Student_Info
+from models import Holiday
 
 #from models import Holiday
 
