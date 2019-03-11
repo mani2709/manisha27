@@ -26,7 +26,7 @@ class Holiday(db.Model):
             'date': self.date,
             'event':self.event
         }
-
+class Student_Info(db.Model):
     __tablename__ = 'stu_info'
 
    
