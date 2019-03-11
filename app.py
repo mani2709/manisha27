@@ -98,7 +98,7 @@ def get_data():
     try:
         All_Holidays=Holiday.query.all()
         All_Students=Student_Info.query.all()
-        return render_template("table.html",All_Holidays = All_Holidays,All_Students = All_Students)
+        return render_template("list.html",All_Holidays = All_Holidays,All_Students = All_Students)
 
         #return  jsonify([e.serialize() for e in books])
     except Exception as e:
