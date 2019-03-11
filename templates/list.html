@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
    <body>
+      <H1> List of all Holidays </H1>
       <table border = 1>
          <thead>
             <td>Month</td>
@@ -9,7 +10,7 @@
             
          </thead>
          
-         {% for row in holidays %}
+         {% for row in All_Holidays %}
             <tr>
                <td>{{row["month"]}}</td>
                <td>{{row["date"]}}</td>
@@ -18,7 +19,24 @@
             </tr>
          {% endfor %}
       </table>
-      
+      <H1> List of all Students </H1>
+      <table border = 1>
+         <thead>
+            <td>Name</td>
+            <td>Addess</td>
+            <td>City</td>
+            
+         </thead>
+         
+         {% for row in All_Holidays %}
+            <tr>
+               <td>{{row["name"]}}</td>
+               <td>{{row["address"]}}</td>
+               <td> {{ row["city"]}}</td>
+             
+            </tr>
+         {% endfor %}
+      </table>
     
    </body>
 </html>
