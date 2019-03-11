@@ -74,14 +74,14 @@ def add_book_form():
             return(str(e))
     return render_template("getdata.html")
 
-@app.route("/add/form2",methods=['GET', 'POST'])
-def add_info():
+@app.route("/add/studentinfo",methods=['GET', 'POST'])
+def add_student_info():
     if request.method == 'POST':
         name=request.form.get('name')
         address=request.form.get('address')
-        city=request.form.get('event')
+        city=request.form.get('city')
         try:
-            table=Holiday(
+            table=Student_Info(
                 name=name,
                 address=address,
                 city=city
