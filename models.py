@@ -84,7 +84,34 @@ class Schedule(db.Model):
             'sub_code':self.sub_code,
             'subject':self.subject
         }
+class time_table(db.Model):
+    __tablename__ = 'tym_table'
 
+   
+
+    id = db.Column(db.Integer, primary_key=True)
+    course = db.Column(db.String())
+    semester = db.Column(db.String())
+    sub_code = db.Column(db.String())
+    subject = db.Column(db.String())
+
+    def __init__(self, course, semester, sub_code, subject):
+        self.course = course
+        self.semester = semester
+        self.sub_code = sub_code
+        self.subject = subject
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
+    def serialize(self):
+        return {
+            'id': self.id, 
+            'course': self.course,
+            'semester': self.semester,
+            'sub_code':self.sub_code,
+            'subject':self.subject
+        }
 
 
 
