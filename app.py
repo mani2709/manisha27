@@ -217,9 +217,9 @@ def add_exam_schedule():
                 sub_code=sub_code,
                 subject=subject
             )
-            db.session.add(schedule)
             db.session.commit()
             return "schedule added. schedule id={}".format(schedule.id)
+            db.session.add(schedule)
         except Exception as e:
             return(str(e))
     return render_template("getschedule.html")
