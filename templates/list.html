@@ -37,6 +37,29 @@
             </tr>
          {% endfor %}
       </table>
+      <H1> Exam Schedule </H1>
+      <table border = 1>
+         <thead>
+            <td>Course</td>
+            <td>Semester</td>
+            <td>Date</td>
+            <td>Sub_code</td>
+            <td>Subject</td>
+            
+         </thead>
+         
+         {% for row in schedule %}
+            <tr>
+               <td>{{row["course"]}}</td>
+               <td>{{row["semester"]}}</td>
+               <td> {{ row["date"]}}</td>
+               <td> {{ row["sub_code"]}}</td>
+               <td> {{ row["subject"]}}</td>
+
+             
+            </tr>
+         {% endfor %}
+      </table>
     
    </body>
 </html>
