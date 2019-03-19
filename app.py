@@ -224,5 +224,26 @@ def add_exam_schedule():
             return(str(e))
     return render_template("getschedule.html")
 
+@app.route("/add/time_table",methods=['GET', 'POST'])
+def add_time_table():
+    if request.method == 'POST':
+        course=request.form.get('course')
+        semester=request.form.get('semester')
+        sub_code=request.form.get('sub_code')
+        subject=request.form.get('subject')
+        try:
+            tym_table=time_table(
+                course=course,
+                semester=semester,
+                sub_code=sub_code,
+                subject=subject
+            )
+            db.session.add(tym_table)
+            db.session.commit()
+            return "tym_table added. tym_table id={}".format(tym_table.id)
+        except Exception as e:
+            return(str(e))
+    return render_template("time_table.html")
+
 if __name__ == '__main__':
     app.run()
