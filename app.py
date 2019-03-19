@@ -201,8 +201,8 @@ def get_by_name(name_):
 
 
 
-@app.route("/add/ex_schedule",methods=['GET', 'POST'])
-def add_exam_schedule():
+@app.route("/add/schedule",methods=['GET', 'POST'])
+def add_schedule():
     if request.method == 'POST':
         course=request.form.get('course')
         semester=request.form.get('semester')
@@ -222,7 +222,14 @@ def add_exam_schedule():
             db.session.add(schedule)
         except Exception as e:
             return(str(e))
-    return render_template("getschedule.html")
+    return render_template("exam.html")
+
+@app.route("/getschedule")
+def get_schedule():
+    try:
+        
+        schedule=Schedule.query.all()
+        return render_template("list.html",schedule = schedule)
 
 @app.route("/add/time_table",methods=['GET', 'POST'])
 def add_time_table():
@@ -244,6 +251,13 @@ def add_time_table():
         except Exception as e:
             return(str(e))
     return render_template("time_table.html")
+
+@app.route("/get_time_table")
+def get_time_table():
+    try:
+        
+        tym_table=Time_table.query.all()
+        return render_template("list.html",tym_table = tym_table)
 
 if __name__ == '__main__':
     app.run()
