@@ -23,23 +23,43 @@
             <br>
 
             <form method="POST">
-
+                <br>
                 <label for="course">course</label>
                 <div class="form-row">
-                    <input class="form-control" type="text" >
-                    <select>
-                    <option>BCA</option>
-                    <option>B.Tech</option>
-                    <option>Polytechnic</option>
-                    <option>MCA</option>
                     
-                     </select>
+                    <input list="course" name="course">
+                    <datalist id="course">
+                    <option value="BCA">
+                    <option value="B.Tech">
+                    <option value="Polytechnic">
+                    <option value="MCA">
+                    
+                    </datalist>
                 </div>
                 <br>
+                <label for="branch">branch</label>
                 <div class="form-row">
-                    <label for="semester">semester</label>
-                    <input class="form-control" type="text" >
-                    <select>
+                    
+                    <input list="branch" name="branch">
+                    <datalist id="branch">
+                    <option value="Electrical">
+                    <option value="Electronics">
+                    <option value="Mechanical">
+                    <option value="Computer Science">
+                    <option value="Civil">
+                    <option value="N/A">
+                    
+                    </datalist>
+                </div>
+                <br>
+
+                <br>
+                <label for="semester">semester</label>
+                <div class="form-row">
+                    
+                    <input list="semester" name="semester">
+                    <datalist id="semester">
+               
                     <option>I</option>
                     <option>II</option>
                     <option>III</option>
@@ -49,8 +69,10 @@
                     <option>VII</option>
                     <option>VIII</option>
                     
-                     </select>
+                      </datalist>
                 </div>
+                <br>
+
                 <br>
                 <div class="form-row ">
                     <label for="date">date</label>
@@ -61,7 +83,7 @@
 
                 <br>
                 <div class="form-row ">
-                    <label for="sub_code">Subject_code</label>
+                    <label for="sub_code">subject_code</label>
                     <input class="form-control " type="text" placeholder="code" id="code" name="code">
                 </div>
 
@@ -72,6 +94,7 @@
                     <label for="subject">Subject</label>
                     <input class="form-control " type="text" placeholder="subject" id="subject" name="subject">
                 </div>
+                <br>
 
                 <br>
                 <button type="submit " class="btn btn-primary " style="float:right ">Submit</button>
