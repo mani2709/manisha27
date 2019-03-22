@@ -1,24 +1,26 @@
 <!doctype html>
 <html>
    <body>
-      <H1> List of all Holidays </H1>
       <table border = 1>
          <thead>
             <td>Month</td>
-            <td>Date</td>
+            <td>Start</td>
+            <td>End</td>
             <td>Event</td>
             
          </thead>
          
-         {% for row in All_Holidays %}
+         {% for row in holidays %}
             <tr>
                <td>{{row["month"]}}</td>
-               <td>{{row["date"]}}</td>
+               <td>{{row["start"]}}</td>
+               <td>{{row["end"]}}</td>
                <td> {{ row["event"]}}</td>
              
             </tr>
          {% endfor %}
       </table>
+     
       <H1> List of all Students </H1>
       <table border = 1>
          <thead>
@@ -37,10 +39,13 @@
             </tr>
          {% endfor %}
       </table>
-      <H1>List of Exam Schedule </H1>
+
+
+      <H1> Exam Schedule </H1>
       <table border = 1>
          <thead>
             <td>Course</td>
+            <td>Branch</td>
             <td>Semester</td>
             <td>Date</td>
             <td>Sub_code</td>
@@ -51,6 +56,7 @@
          {% for row in schedule %}
             <tr>
                <td>{{row["course"]}}</td>
+                <td>{{row["branch"]}}</td>
                <td>{{row["semester"]}}</td>
                <td> {{ row["date"]}}</td>
                <td> {{ row["sub_code"]}}</td>
@@ -60,26 +66,6 @@
             </tr>
          {% endfor %}
       </table>
-      <H1> List of Time Table </H1>
-      <table border = 1>
-         <thead>
-            <td>Course</td>
-            <td>Semester</td>
-            <td>Sub_code</td>
-            <td>Subject</td>
-            
-         </thead>
-         
-         {% for row in schedule %}
-            <tr>
-               <td>{{row["course"]}}</td>
-               <td>{{row["semester"]}}</td>
-               <td> {{ row["sub_code"]}}</td>
-               <td> {{ row["subject"]}}</td>
-
-             
-            </tr>
-         {% endfor %}
-      </table>
+    
    </body>
 </html>
