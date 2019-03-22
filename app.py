@@ -1,6 +1,9 @@
 import os
 from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+from sqlalchemy import extract
+
 
 
 app = Flask(__name__)
@@ -10,6 +13,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 from models import Holiday
+from models import Student_Info
+from models import Schedule
 
 #from models import Holiday
 
@@ -54,9 +59,19 @@ def get_by_id():
     month = req['queryResult']['parameters']['Months']
     print("action is", action)
     print("month is", month)
+    #today_month = datetime.today().month
+    #print('today_month', today_month)
+    #months = Holiday.query.filter_by(extract('month', Holiday.datetime) == datetime.today().month.strftime("%B")).all()
+    #print("months is", months)
+
+    #Payment.query.filter(extract('month', Payment.due_date) >= datetime.today().month,)
+
+    #start = db.Column(db.DateTime, nullable = False, default = datetime.strftime(datetime.today(), "%b %d %Y"))
+    #end = db.Column(db.DateTime, nullable = False, default = datetime.strftime(datetime.today(), "%b %d %Y"))
     try: 
         if action=='Holiday':
-            holiday=Holiday.query.filter_by(month=month).all()
+            holiday=Holiday.query.filter_by(month = month).all()
+            
             holiday_count=Holiday.query.filter_by(month=month).count()
             print("count the holidays",holiday_count, len(holiday))
 
@@ -80,7 +95,8 @@ def get_by_id():
 
                 i = i + 1
                 print("print rows", row.id, row.month, row.date, row.event)
-                Result= str(row.id) +'There is a holiday in the month of '+ str(row.month) + ' on'+str(row.date) + 'for the occasion of' + str(row.event) + ' ', 
+
+                Result= 'There is a holiday in the month of '+ str(row.month) + ' on'+str(row.date) + 'for the occasion ' + str(row.event) + '  '  
            # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
 
                 print("result is", Result)
@@ -107,15 +123,18 @@ def get_by_id():
 @app.route("/add/form",methods=['GET', 'POST'])
 def add_book_form():
     if request.method == 'POST':
-        month=request.form.get('month')
-        date=request.form.get('date')
+        month = request.form.get('month')
+        start=request.form.get('start')
+        end=request.form.get('end')
         event=request.form.get('event')
         try:
             holiday=Holiday(
                 month=month,
-                date=date,
+                start=start,
+                end=end,
                 event=event
             )
+            
             db.session.add(holiday)
             db.session.commit()
             return "Holiday added. holiday id={}".format(holiday.id)
@@ -197,29 +216,31 @@ def get_by_name(name_):
 
     except Exception as e:
 
-        return(str(e))
 
+        return(str(e))
 
 
 @app.route("/add/schedule",methods=['GET', 'POST'])
 def add_schedule():
     if request.method == 'POST':
         course=request.form.get('course')
+        branch=request.form.get('branch')
         semester=request.form.get('semester')
         date=request.form.get('date')
         sub_code=request.form.get('sub_code')
         subject=request.form.get('subject')
         try:
-            schedule=Schedule(
+            data=Schedule(
                 course=course,
+                branch=branch,
                 semester=semester,
                 date=date,
                 sub_code=sub_code,
                 subject=subject
             )
+            db.session.add(data)
             db.session.commit()
-            return "schedule added. schedule id={}".format(schedule.id)
-            db.session.add(schedule)
+            return "schedule added. schedule id={}".format(data.id)
         except Exception as e:
             return(str(e))
     return render_template("exam.html")
@@ -231,33 +252,9 @@ def get_schedule():
         schedule=Schedule.query.all()
         return render_template("list.html",schedule = schedule)
 
-@app.route("/add/time_table",methods=['GET', 'POST'])
-def add_time_table():
-    if request.method == 'POST':
-        course=request.form.get('course')
-        semester=request.form.get('semester')
-        sub_code=request.form.get('sub_code')
-        subject=request.form.get('subject')
-        try:
-            tym_table=time_table(
-                course=course,
-                semester=semester,
-                sub_code=sub_code,
-                subject=subject
-            )
-            db.session.add(tym_table)
-            db.session.commit()
-            return "tym_table added. tym_table id={}".format(tym_table.id)
-        except Exception as e:
-            return(str(e))
-    return render_template("time_table.html")
-
-@app.route("/get_time_table")
-def get_time_table():
-    try:
-        
-        tym_table=Time_table.query.all()
-        return render_template("list.html",tym_table = tym_table)
+        return  jsonify([e.serialize() for e in books])
+    except Exception as e:
+        return(str(e))
 
 if __name__ == '__main__':
     app.run()
