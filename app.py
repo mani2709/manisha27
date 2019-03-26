@@ -69,14 +69,12 @@ def get_by_id():
 
     #Payment.query.filter(extract('month', Payment.due_date) >= datetime.today().month,)
 
-    start = db.Column(db.DateTime, nullable = False, default = datetime.strftime(datetime.today(), "%b %d %Y"))
-    end = db.Column(db.DateTime, nullable = False, default = datetime.strftime(datetime.today(), "%b %d %Y"))
-    a = Holiday.query.filter(cast(Holiday.start, DATE)==date.today()).all()
-    print("a is",a)
+    # start =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
+    # end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
 
     try: 
         if action=='Holiday':
-            holiday=Holiday.query.filter_by(month = month).all()
+            holiday=Holiday.query.filter_by(start.strftime("%B") = month).all()
             
             holiday_count=Holiday.query.filter_by(month=month).count()
             print("count the holidays",holiday_count, len(holiday))
@@ -130,14 +128,14 @@ def get_by_id():
 def add_book_form():
     if request.method == 'POST':
         
-        start=request.form.get('start')
-        end=request.form.get('end')
+        start_date=request.form.get('start_date')
+        end_date=request.form.get('end_date')
         event=request.form.get('event')
         try:
             holiday=Holiday(
     
-                start=start,
-                end=end,
+                start_date=start_date,
+                end_date=end_date,
                 event=event
             )
             
