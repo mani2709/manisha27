@@ -7,13 +7,13 @@ class Holiday(db.Model):
    
 
     id = db.Column(db.Integer, primary_key=True)
-    month = db.Column(db.String())
+    
     start = db.Column(db.String())
     end = db.Column(db.String())
     event = db.Column(db.String())
 
-    def __init__(self, month, start, end, event):
-        self.month = month
+    def __init__(self, start, end, event):
+        
         self.start = start
         self.end = end
         self.event = event
@@ -24,7 +24,7 @@ class Holiday(db.Model):
     def serialize(self):
         return {
             'id': self.id, 
-            'month' : self.month,
+        
             'start': self.start,
             'end': self.end,
             'event':self.event
@@ -64,6 +64,8 @@ class Schedule(db.Model):
             'sub_code':self.sub_code,
             'subject':self.subject
         }
+
+
 
 class Student_Info(db.Model):
     __tablename__ = 'stu_info'
