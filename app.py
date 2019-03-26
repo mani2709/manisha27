@@ -71,12 +71,11 @@ def get_by_id():
 
     # start =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
     # end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
-    a=start_date
-    print(a)
+  
 
     try: 
         if action=='Holiday':
-            holiday=Holiday.query.filter_by(a.strftime("%B") = month).all()
+            holiday=Holiday.query.filter_by(start_date.strftime("%B") == month).all()
             
             holiday_count=Holiday.query.filter_by(month=month).count()
             print("count the holidays",holiday_count, len(holiday))
