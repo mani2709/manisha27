@@ -71,8 +71,6 @@ def get_by_id():
 
     # start =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
     # end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
-  
-
     try: 
         if action=='Holiday':
             holiday=Holiday.query.filter_by(start_date.strftime("%B") == month).all()
