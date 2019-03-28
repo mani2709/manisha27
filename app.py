@@ -73,7 +73,7 @@ def get_by_id():
     # end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
     try: 
         if action=='Holiday':
-            holiday=Holiday.query.filter_by(start_date.strftime("%B") == month).all()
+            holiday=Holiday.query.filter_by(month=month).all()
             
             holiday_count=Holiday.query.filter_by(month=month).count()
             print("count the holidays",holiday_count, len(holiday))
@@ -127,14 +127,14 @@ def get_by_id():
 def add_book_form():
     if request.method == 'POST':
         
-        start_date=request.form.get('start_date')
-        end_date=request.form.get('end_date')
+        month=request.form.get('month')
+        date=request.form.get('date')
         event=request.form.get('event')
         try:
             holiday=Holiday(
     
-                start_date=start_date,
-                end_date=end_date,
+                month=month,
+                date=date,
                 event=event
             )
             

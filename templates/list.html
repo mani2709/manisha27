@@ -4,8 +4,8 @@
       <table border = 1>
          <thead>
             
-            <td>Start_date</td>
-            <td>End_date</td>
+            <td>month</td>
+            <td>date</td>
             <td>Event</td>
             
          </thead>
@@ -13,8 +13,8 @@
          {% for row in holidays %}
             <tr>
                
-               <td>{{row["start_date"]}}</td>
-               <td>{{row["end_date"]}}</td>
+               <td>{{row["month"]}}</td>
+               <td>{{row["date"]}}</td>
                <td> {{ row["event"]}}</td>
              
             </tr>
