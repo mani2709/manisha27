@@ -73,7 +73,7 @@ def get_by_id():
     # end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
     try: 
         if action=='Holiday':
-            holiday=Holiday.query.filter_by(month=month).all()
+            holiday=Holiday.query.filter_by(start_end.strftime("%B") == month).all()
             
             holiday_count=Holiday.query.filter_by(month=month).count()
             print("count the holidays",holiday_count, len(holiday))
@@ -127,14 +127,14 @@ def get_by_id():
 def add_book_form():
     if request.method == 'POST':
         
-        month=request.form.get('month')
-        date=request.form.get('date')
+        start_date=request.form.get('start_date')
+        end_date=request.form.get('end_date')
         event=request.form.get('event')
         try:
             holiday=Holiday(
     
-                month=month,
-                date=date,
+                start_date=start_date,
+                end_date=end_date,
                 event=event
             )
             
@@ -226,7 +226,7 @@ def get_by_name(name_):
 @app.route("/add/schedule",methods=['GET', 'POST'])
 def add_schedule():
     if request.method == 'POST':
-        course=request.form.get('course')
+        course=request.form.get('course')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         branch=request.form.get('branch')
         semester=request.form.get('semester')
         date=request.form.get('date')

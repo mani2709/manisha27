@@ -1,4 +1,6 @@
 from app import db
+from datetime import datetime
+
 
 
 
@@ -9,16 +11,16 @@ class Holiday(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     
-    month =  db.Column(db.String())
+    start_date =  db.Column(db.DateTime, default=datetime.utcnow))
 
-    date =db.Column(db.String())
+    end_date =db.Column(db.DateTime, default=datetime.utcnow)
 
     event = db.Column(db.String())
 
     def __init__(self, month, date, event):
         
-        self.month = month
-        self.date = date
+        self.start_date = start_end
+        self.end_date = end_date
         self.event = event
 
     def __repr__(self):
@@ -28,8 +30,8 @@ class Holiday(db.Model):
         return {
             'id': self.id, 
         
-            'month': self.month,
-            'date': self.date,
+            'start_date': self.start_date,
+            'end_date': self.end_date,
             'event':self.event
         }
 
