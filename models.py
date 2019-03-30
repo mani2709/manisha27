@@ -13,7 +13,7 @@ class Holiday(db.Model):
     
     start_date =  db.Column(db.DateTime, default=datetime.utcnow))
 
-    end_date =db.Column(db.DateTime, default=datetime.utcnow)
+    end_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     event = db.Column(db.String())
 
