@@ -5,7 +5,7 @@ from datetime import datetime
 from sqlalchemy import extract
 import calendar
 from sqlalchemy import cast, DATE
-from datetime import date
+
 
 
 
@@ -74,8 +74,8 @@ def get_by_id():
     # end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
     try: 
         if action=='Holiday':
-            #holiday=Holiday.query.filter_by(start_date.strftime("%B") == month).all()
-            holiday = Holiday.query.filter_by(cast(Holiday.start_date.strftime("%B"), DATE) == month).all()
+            holiday=Holiday.query.filter_by(start_date.strftime("%B") == month).all()
+            
             
             #holiday_count=Holiday.query.filter_by(month=month).count()
             #print("count the holidays",holiday_count, len(holiday))
