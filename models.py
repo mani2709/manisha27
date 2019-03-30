@@ -11,7 +11,7 @@ class Holiday(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     
-    start_date =  db.Column(db.DateTime, default=datetime.utcnow)
+    start_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     end_date = db.Column(db.DateTime, default=datetime.utcnow)
 
