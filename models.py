@@ -98,6 +98,43 @@ class Student_Info(db.Model):
             'city':self.city
         }
 
+class Syllabus(db.Model):
+    __tablename__ = 'syllabus'
+
+   
+    id = db.Column(db.Integer, primary_key=True)
+    details= db.Column(db.String())
+    course = db.Column(db.String())
+    branch = db.Column(db.String())
+    semester = db.Column(db.String())
+    date = db.Column(db.String())
+    sub_code = db.Column(db.String())
+    subject = db.Column(db.String())
+
+    def __init__(self, details, course, branch, semester,  sub_code, subject):
+        self.details = details
+        self.course = course
+        self.branch = branch
+        self.semester = semester
+        self.sub_code = sub_code
+        self.subject = subject
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
+    def serialize(self):
+        return {
+            'id': self.id, 
+            'details': self.details,
+            'course': self.course,
+            'branch': self.branch,
+            'semester': self.semester,
+            'sub_code':self.sub_code,
+            'subject':self.subject
+        }
+
+
+
 
 
 

@@ -66,6 +66,33 @@
             </tr>
          {% endfor %}
       </table>
+
+
+      <H1> Syllabus </H1>
+      <table border = 1>
+         <thead>
+            <td>details</td>
+            <td>Course</td>
+            <td>Branch</td>
+            <td>Semester</td>
+            <td>Sub_code</td>
+            <td>Subject</td>
+            
+         </thead>
+         
+         {% for row in schedule %}
+            <tr>
+                <td>{{row["details"]}}</td>
+               <td>{{row["course"]}}</td>
+                <td>{{row["branch"]}}</td>
+               <td>{{row["semester"]}}</td>
+               <td> {{ row["sub_code"]}}</td>
+               <td> {{ row["subject"]}}</td>
+
+             
+            </tr>
+         {% endfor %}
+      </table>
     
    </body>
 </html>
