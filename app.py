@@ -151,13 +151,13 @@ def add_book_form():
 def add_student_info():
     if request.method == 'POST':
         name=request.form.get('name')
-        address=request.form.get('address')
-        city=request.form.get('city')
+        registration_number=request.form.get('registration_number')
+        email=request.form.get('email')
         try:
             table=Student_Info(
                 name=name,
-                address=address,
-                city=city
+                registration_number=registration_number,
+                email= email
             )
             db.session.add(table)
             db.session.commit()

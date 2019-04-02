@@ -79,13 +79,13 @@ class Student_Info(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
-    address = db.Column(db.String())
-    city = db.Column(db.String())
+    registration_number = db.Column(db.String())
+    email = db.Column(db.String())
 
-    def __init__(self, name, address, city):
+    def __init__(self, name, registration_number, email):
         self.name = name
-        self.address = address
-        self.city = city
+        self.registration_number = registration_number
+        self.email = email
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
@@ -94,8 +94,8 @@ class Student_Info(db.Model):
         return {
             'id': self.id, 
             'name': self.name,
-            'address': self.address,
-            'city':self.city
+            'registration_number': self.registration_number,
+            'email':self.email
         }
 
 class Syllabus(db.Model):
