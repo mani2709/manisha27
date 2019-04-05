@@ -93,6 +93,44 @@
             </tr>
          {% endfor %}
       </table>
+
+      <H1> Timetable </H1>
+      <table border = 1>
+         <thead>
+            <td>Course</td>
+            <td>Branch</td>
+            <td>Semester</td>
+            <td>Timing</td>
+            <td>Monday</td>
+            <td>Tuesday</td>
+            <td>Wednesday</td>
+            <td>Thursday</td>
+            <td>Friday</td>
+            <td>Saturday</td>
+           
+         </thead>
+         
+         {% for row in timetable %}
+            <tr>
+               <td>{{row["course"]}}</td>
+               <td>{{row["branch"]}}</td>
+               <td>{{row["semester"]}}</td>
+               <td>{{row["timing"]}}</td>
+               <td>{{row["monday"]}}</td>
+               <td>{{row["tuesday"]}}</td>
+               <td>{{row["wednesday"]}}</td>
+               <td>{{row["thursday"]}}</td>
+               <td>{{row["friday"]}}</td>
+               <td>{{row["saturday"]}}</td>
+              
+             
+            </tr>
+         {% endfor %}
+      </table>
+    
+   </body>
+</html>
+
     
    </body>
 </html>

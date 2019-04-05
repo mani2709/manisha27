@@ -351,8 +351,6 @@ def get_timetable():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
-@app.route("/get33")
-def test():
-    return render_template("time_table.html")
+        
 if __name__ == '__main__':
     app.run()
