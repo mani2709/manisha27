@@ -19,6 +19,7 @@ db = SQLAlchemy(app)
 from models import Holiday
 from models import Student_Info
 from models import Schedule
+from models import Timetable
 
 #from models import Holiday
 
@@ -351,6 +352,6 @@ def get_timetable():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
-        
+
 if __name__ == '__main__':
     app.run()
