@@ -353,6 +353,6 @@ def get_timetable():
         return(str(e))
 @app.route("/get33")
 def test():
-    return render_template("test1.html")
+    return render_template("time_table.html")
 if __name__ == '__main__':
     app.run()
