@@ -285,7 +285,7 @@ def add_syllabus():
             )
             db.session.add(data)
             db.session.commit()
-            return "schedule added. schedule id={}".format(data.id)
+            return "syllabus added. syllabus id={}".format(data.id)
         except Exception as e:
             return(str(e))
     return render_template("syllabus.html")
@@ -295,7 +295,7 @@ def get_syllabus():
     try:
         
         syllabus=Syllabus.query.all()
-        return render_template("list.html",schedule = syllabus)
+        return render_template("list.html",syllabus = syllabus)
 
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
