@@ -71,7 +71,7 @@
       <H1> Syllabus </H1>
       <table border = 1>
          <thead>
-            <td>details</td>
+            <td>units</td>
             <td>Course</td>
             <td>Branch</td>
             <td>Semester</td>
@@ -82,7 +82,7 @@
          
          {% for row in schedule %}
             <tr>
-                <td>{{row["details"]}}</td>
+                <td>{{row["units"]}}</td>
                <td>{{row["course"]}}</td>
                 <td>{{row["branch"]}}</td>
                <td>{{row["semester"]}}</td>
