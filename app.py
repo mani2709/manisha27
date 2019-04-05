@@ -223,7 +223,7 @@ def get_by_name(name_):
 
 
         return(str(e))
-
+#----------------------------------------------------schedule---------------------------------------------------
 
 @app.route("/add/schedule",methods=['GET', 'POST'])
 def add_schedule():
@@ -261,7 +261,7 @@ def get_schedule():
     except Exception as e:
         return(str(e))
 
-
+#---------------------------------------------------syllabus-----------------------------------------------------
 
 @app.route("/add/syllabus",methods=['GET', 'POST'])
 def add_syllabus():
@@ -299,5 +299,60 @@ def get_syllabus():
     except Exception as e:
         return(str(e))
 
+#--------------------------------------------tym table----------------------------------------------------
+
+@app.route("/add/timetable",methods=['GET', 'POST'])
+def add_timetable():
+    if request.method == 'POST':
+        course=request.form.get('course')
+        branch=request.form.get('branch')
+        semester=request.form.get('semester')
+        timing=request.form.get('timing')
+        monday=request.form.get('monday')
+        tuesday=request.form.get('tuesday')
+        wednesday=request.form.get('wednesday')
+        thursday=request.form.get('thursday')
+        friday=request.form.get('friday')
+        saturday=request.form.get('saturday')
+        
+        
+        try:
+            timetable=Timetable(
+                course=course,
+                branch=branch,
+                semester=semester,
+                timing=timing,
+                monday=monday,
+                tuesday=tuesday,
+                wednesday=wednesday,
+                thursday=thursday,
+                friday=friday,
+                saturday=saturday
+
+            )
+            db.session.add(timetable)
+            db.session.commit()
+            return "timetable added. timetable id={}".format(timetable.id)
+        except Exception as e:
+            print("hujhjgjhg")
+            return(str(e))
+    return render_template("year.html")
+
+
+
+
+@app.route("/get/timetable")
+def get_timetable():
+    try:
+        
+        timetable=Timetable.query.all()
+        return render_template("list.html",timetable = timetable)
+
+        return  jsonify([e.serialize() for e in books])
+    except Exception as e:
+        return(str(e))
+@app.route("/get33")
+def test():
+    return render_template("test1.html")
 if __name__ == '__main__':
     app.run()
