@@ -103,7 +103,7 @@ class Syllabus(db.Model):
 
    
     id = db.Column(db.Integer, primary_key=True)
-    details= db.Column(db.String())
+    units= db.Column(db.String())
     course = db.Column(db.String())
     branch = db.Column(db.String())
     semester = db.Column(db.String())
@@ -111,8 +111,8 @@ class Syllabus(db.Model):
     sub_code = db.Column(db.String())
     subject = db.Column(db.String())
 
-    def __init__(self, details, course, branch, semester,  sub_code, subject):
-        self.details = details
+    def __init__(self, units, course, branch, semester,  sub_code, subject):
+        self.units = units
         self.course = course
         self.branch = branch
         self.semester = semester
@@ -125,7 +125,7 @@ class Syllabus(db.Model):
     def serialize(self):
         return {
             'id': self.id, 
-            'details': self.details,
+            'units': self.units,
             'course': self.course,
             'branch': self.branch,
             'semester': self.semester,
