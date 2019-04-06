@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>List of all data</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -12,6 +12,7 @@
    <div class="container">
       <table class="table table-striped">
           <H1> Holidays </H1>
+           <table border = 1>
       <thead>
       <td>start_date</td>
       <td>end_date</td>
@@ -20,13 +21,10 @@
       {% for row in holidays %}
             <tbody>
                <tr>
-               
-               
                <td>{{row["start_date"]}}</td>
                <td>{{row["end_date"]}}</td>
                <td> {{ row["event"]}}</td>
-             
-            </tr>
+              </tr>
          {% endfor %}
       </tbody>
       </table>
