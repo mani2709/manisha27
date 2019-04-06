@@ -252,7 +252,7 @@ def add_schedule():
             return(str(e))
     return render_template("exam.html")
 
-@app.route("/getschedule")
+@app.route("/get/schedule")
 def get_schedule():
     try:
         
@@ -275,7 +275,7 @@ def add_syllabus():
         sub_code=request.form.get('sub_code')
         subject=request.form.get('subject')
         try:
-            data=Syllabus(
+            data1=Syllabus(
                 units=units,
                 course=course,
                 branch=branch,
@@ -283,9 +283,9 @@ def add_syllabus():
                 sub_code=sub_code,
                 subject=subject
             )
-            db.session.add(data)
+            db.session.add(data1)
             db.session.commit()
-            return "syllabus added. syllabus id={}".format(data.id)
+            return "syllabus added. syllabus id={}".format(data1.id)
         except Exception as e:
             return(str(e))
     return render_template("syllabus.html")
