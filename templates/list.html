@@ -1,17 +1,25 @@
-<!doctype html>
-<html>
-   <body>
-      <table border = 1>
-         <thead>
-            
-            <td>start_date</td>
-            <td>end_date</td>
-            <td>Event</td>
-            
-         </thead>
-         
-         {% for row in holidays %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+   <div class="container">
+      <table class="table table-striped">
+      <thead>
+      <td>start_date</td>
+      <td>end_date</td>
+      <td>Event</td>
+      {% for row in holidays %}
             <tr>
+            </thead>
+            <tbody>
+               <tr>
                
                <td>{{row["start_date"]}}</td>
                <td>{{row["end_date"]}}</td>
@@ -19,18 +27,24 @@
              
             </tr>
          {% endfor %}
+      </tbody>
       </table>
      
+     <div class="container">
+      <table class="table table-striped">
       <H1> List of all Students </H1>
       <table border = 1>
          <thead>
+            
             <td>Name</td>
             <td>Registration_number</td>
             <td>Email</td>
             
          </thead>
          
+         
          {% for row in All_Students %}
+         <tbody>
             <tr>
                <td>{{row["name"]}}</td>
                <td>{{row["Registration_number"]}}</td>
@@ -38,6 +52,7 @@
          
             </tr>
          {% endfor %}
+      </tbody>
       </table>
 
 
@@ -54,6 +69,8 @@
          </thead>
          
          {% for row in schedule %}
+         <tbody>
+
             <tr>
                <td>{{row["course"]}}</td>
                 <td>{{row["branch"]}}</td>
@@ -65,6 +82,7 @@
              
             </tr>
          {% endfor %}
+      </tbody>
       </table>
 
 
@@ -81,6 +99,7 @@
          </thead>
          
          {% for row in schedule %}
+         <tbody>
             <tr>
                 <td>{{row["units"]}}</td>
                <td>{{row["course"]}}</td>
@@ -92,6 +111,7 @@
              
             </tr>
          {% endfor %}
+      </tbody>
       </table>
 
       <H1> Timetable </H1>
@@ -111,6 +131,7 @@
          </thead>
          
          {% for row in timetable %}
+         <tbody>
             <tr>
                <td>{{row["course"]}}</td>
                <td>{{row["branch"]}}</td>
@@ -126,6 +147,7 @@
              
             </tr>
          {% endfor %}
+      </tbody>
       </table>
     
    </body>
