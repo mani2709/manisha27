@@ -372,6 +372,10 @@ def add_event():
         return "event1 added. event1 id={}".format(event1.id)
     except Exception as e:
         return(str(e))
+        return render_template("event.html")
+
+
+
         
 @app.route("/get_event")
 def get_event():
