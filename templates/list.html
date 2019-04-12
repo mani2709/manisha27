@@ -10,7 +10,7 @@
 </head>
 <body>
    <div class="container">
-      <table class="table table-striped">
+    
           <H1> Holidays </H1>
            <table border = 1>
       <thead>
@@ -30,7 +30,6 @@
       </table>
      
      <div class="container">
-      <table class="table table-striped">
       <H1>  Students_Info </H1>
       <table border = 1>
          <thead>
@@ -148,10 +147,29 @@
          {% endfor %}
       </tbody>
       </table>
+
+
+      
+          <H1> Events </H1>
+           <table border = 1>
+      <thead>
+      <td>Month</td>
+      <td>Date</td>
+      <td>Event</td>
+   </thead>
+      {% for row in event %}
+            <tbody>
+               <tr>
+               <td>{{row["month"]}}</td>
+               <td>{{row["date"]}}</td>
+               <td> {{ row["event"]}}</td>
+              </tr>
+         {% endfor %}
+      </tbody>
+      </table>
+     
     
    </body>
 </html>
 
-    
-   </body>
-</html>
+   

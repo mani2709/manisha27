@@ -21,6 +21,7 @@ from models import Student_Info
 from models import Schedule
 from models import Syllabus
 from models import Timetable
+from models import Event
 
 #from models import Holiday
 
@@ -342,8 +343,7 @@ def add_timetable():
 
 
 
-
-@app.route("/get/timetable")
+ @app.route("/get/timetable")
 def get_timetable():
     try:
         
@@ -353,6 +353,41 @@ def get_timetable():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
+
+#-------------------------------------------------Events---------------------------------------------------
+
+@app.route("/add_event")
+def add_event():
+    month=request.args.get('month')
+    date=request.args.get('date')
+    event=request.args.get('event')
+    try:
+        event1=event(
+            month=month,
+            date=date,
+            event=event
+        )
+        db.session.add(event1)
+        db.session.commit()
+        return "event1 added. event1 id={}".format(event1.id)
+    except Exception as e:
+        return(str(e))
+        
+@app.route("/get_event")
+def get_event():
+    try:
+        
+        event=Event.query.all()
+        return render_template("list.html",event = event)
+
+        return  jsonify([e.serialize() for e in books])
+    except Exception as e:
+        return(str(e))
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run()
