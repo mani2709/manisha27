@@ -343,7 +343,7 @@ def add_timetable():
 
 
 
- @app.route("/get/timetable")
+@app.route("/get/timetable")
 def get_timetable():
     try:
         
