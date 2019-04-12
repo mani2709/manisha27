@@ -362,7 +362,7 @@ def add_event():
     date=request.args.get('date')
     event=request.args.get('event')
     try:
-        event1=event(
+        event1=Event(
             month=month,
             date=date,
             event=event
