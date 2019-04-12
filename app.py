@@ -356,7 +356,7 @@ def get_timetable():
 
 #-------------------------------------------------Events---------------------------------------------------
 
-@app.route("/add_event")
+@app.route("/add/event")
 def add_event():
     month=request.args.get('month')
     date=request.args.get('date')
@@ -377,7 +377,7 @@ def add_event():
 
 
         
-@app.route("/get_event")
+@app.route("/get/event")
 def get_event():
     try:
         
