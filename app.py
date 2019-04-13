@@ -376,12 +376,12 @@ def add_event():
 
 
 
-        
+
 @app.route("/get/event")
 def get_event():
     try:
         
-        event=Event.query.all()
+        event = Event.query.all()
         return render_template("list.html",event = event)
 
         return  jsonify([e.serialize() for e in books])

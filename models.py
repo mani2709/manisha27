@@ -185,7 +185,7 @@ class Timetable(db.Model):
 
 
     class Event(db.Model):
-    __tablename__ = 'event'
+    __tablename__ = 'event_info'
 
    
 
