@@ -183,21 +183,15 @@ class Timetable(db.Model):
             
         }
 
+ class Event(db.Model):
+     __tablename__ = 'eventinfo'
 
-    class Event(db.Model):
-    __tablename__ = 'eventinfo'
+     id = db.Column(db.Integer, primary_key=True)
+     month =  db.Column(db.String())
+     date =db.Column(db.String())
+     event = db.Column(db.String())
 
-   
-
-    id = db.Column(db.Integer, primary_key=True)
-    
-    month =  db.Column(db.String())
-
-    date =db.Column(db.String())
-
-    event = db.Column(db.String())
-
-    def __init__(self, month, date, event):
+     def __init__(self, month, date, event):
         
         self.month = month
         self.date = date
