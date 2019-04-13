@@ -185,8 +185,7 @@ def get_data():
             print("All Students name -",row.name)
 
             print("All Students city -",row.city)
-
-        return render_template("list.html",All_Holidays = All_Holidays,All_Students = All_Students)
+            return render_template("list.html",All_Holidays = All_Holidays,All_Students = All_Students)
 
 
 
