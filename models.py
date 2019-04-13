@@ -185,7 +185,7 @@ class Timetable(db.Model):
 
 
  class Event(db.Model):
-     __tablename__= 'eve'
+     __tablename__= 'events'
 
      id = db.Column(db.Integer, primary_key=True)
      month =  db.Column(db.String())
