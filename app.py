@@ -353,37 +353,40 @@ def get_timetable():
 
 #-------------------------------------------------Events---------------------------------------------------
 
-@app.route("/add/event")
+@app.route("/add/event",methods=['GET', 'POST'])
 def add_event():
-    month=request.args.get('month')
-    date=request.args.get('date')
-    event=request.args.get('event')
-    try:
-        event1=Event(
-            month=month,
-            date=date,
-            event=event
-        )
-        db.session.add(event1)
-        db.session.commit()
-        return "event1 added. event1 id={}".format(event1.id)
-    except Exception as e:
-        return(str(e))
-        return render_template("event.html")
+    if request.method == 'POST':
+        
+        month=request.form.get('month')
+        date=request.form.get('date')
+        event=request.form.get('event')
+        try:
+            event1=Event(
+    
+                month=month,
+                date=date,
+                event=event
+            )
+            
+            db.session.add(event1)
+            db.session.commit()
+            return "event added. event id={}".format(event1.id)
+             
+        except Exception as e:
+            return(str(e))
+    return render_template("event.html")
 
-
-
-
-@app.route("/get/event")
-def get_event():
+@app.route("/geteve")
+def get_eve():
     try:
         
         event = Event.query.all()
-        return render_template("list.html",event = event)
+        return render_template("list.html", event = event)
 
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
+
 
 
 
