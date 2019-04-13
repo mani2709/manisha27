@@ -5,6 +5,12 @@ from datetime import datetime
 from sqlalchemy import extract
 import calendar
 from sqlalchemy import cast, DATE
+from models import Holiday
+from models import Student_Info
+from models import Schedule
+from models import Syllabus
+from models import Timetable
+from models import Event
 
 
 
@@ -16,12 +22,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Holiday
-from models import Student_Info
-from models import Schedule
-from models import Syllabus
-from models import Timetable
-from models import Event
+
 
 @app.route("/")
 def hello():
