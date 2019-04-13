@@ -370,7 +370,7 @@ def add_event():
             
             db.session.add(event1)
             db.session.commit()
-            return "event added. event id={}".format(event1.id)
+            return "event1 added. event1 id={}".format(event1.id)
              
         except Exception as e:
             return(str(e))
@@ -380,8 +380,8 @@ def add_event():
 def get_eve():
     try:
         
-        event = Event.query.all()
-        return render_template("list.html", event = event)
+        events = Event.query.all()
+        return render_template("list.html", events = events)
 
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
