@@ -317,6 +317,7 @@ def get1():
 
 @app.route("/add/timetable",methods=['GET', 'POST'])
 def add_timetable():
+    print("At start")
     if request.method == 'POST':
         course=request.form.get('course')
         branch=request.form.get('branch')
@@ -350,6 +351,7 @@ def add_timetable():
         except Exception as e:
             print("hujhjgjhg")
             return(str(e))
+        print("At start")
         return render_template("time_table.html")
 
 
