@@ -392,7 +392,7 @@ def get3():
             #print("Month is",row.month)
             #print("Date is",holiday.date)
             #print("Event is",holiday.event)
-            if(len(Timetable)==0):
+            if(len(timetable)==0):
                  response =  """
                         {0}
                     
@@ -407,7 +407,7 @@ def get3():
             for row in Timetable:
 
                 i = i + 1
-                print("print rows", row.date, row.sub_code, row.subject)
+                #print("print rows", row.date, row.sub_code, row.subject)
 
                 Result=  str(row.monday) + str(row.tuesday) + str(row.wednesday) + '  '  
            # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
