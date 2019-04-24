@@ -404,7 +404,7 @@ def get3():
             Result=''
             response=''
             reply= ''
-            for row in Timetable:
+            for row in timetable:
 
                 i = i + 1
                 #print("print rows", row.date, row.sub_code, row.subject)
