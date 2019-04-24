@@ -350,7 +350,7 @@ def add_timetable():
         except Exception as e:
             print("hujhjgjhg")
             return(str(e))
-    return render_template("time_table.html")
+    
 
 
 
@@ -365,7 +365,9 @@ def get_timetable():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
-
+@app.route("/get33")
+def test():
+    return render_template("time_table.html")
 
 @app.route("/add/syllabus",methods=['GET', 'POST'])
 def add_syllabus():
@@ -404,10 +406,117 @@ def get_syllabus():
         return(str(e))
 
 
+@app.route("/add/calendar",methods=['GET', 'POST'])
+def add_calendar():
+    if request.method == 'POST':
+        
+        month=request.form.get('month')
+        date=request.form.get('date')
+        event=request.form.get('event')
+        try:
+            calendar=Calendar(
+    
+                month=month,
+                date=date,
+                event=event
+            )
+            
+            db.session.add(calendar)
+            db.session.commit()
+            print("calendar", calendar)
+            message = "calendar updated. calendar id={}".format(calendar.id)
+            session['message'] = message
+            print("session is",session)
+            return redirect(url_for('get_cal'))
+            #return render_template("list.html",calendar = calendar)
 
-                     
+            
+        except Exception as e:
+            return(str(e))
+    return render_template("calendar.html")
 
+@app.route("/getcal")
+def get_cal():
+    try:
+        
+        calendar=Calendar.query.all()
+        print("message value was previously set to:" +session['message'])
+        message = session['message']
+        session['message'] = ''
+        return render_template("list.html",calendar = calendar,message =message)
 
+        return  jsonify([e.serialize() for e in books])
+    except Exception as e:
+        return(str(e))
+
+@app.route("/get5",methods=['GET', 'POST'] )
+def get5():
+    print("helloooo")
+
+    req = request.get_json(silent=True, force=True)
+    action = req['queryResult']['parameters']['calendar']
+    #month = req['queryResult']['parameters']['Months']
+    print("action is", action)
+    #print("month is", month)
+    #today_month = datetime.today().month
+    #print('today_month', today_month)
+    #months = Holiday.query.filter_by(extract('month', Holiday.datetime) == datetime.today().month.strftime("%B")).all()
+    #print("months is", months)
+
+    #Payment.query.filter(extract('month', Payment.due_date) >= datetime.today().month,)
+
+    #start =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
+    #end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
+
+    try: 
+        if action=='Academic calendar':
+            calendar=Calendar.query.all()
+            
+            #holiday_count=Holiday.query.filter_by(month=month).count()
+            #print("count the holidays",holiday_count, len(holiday))
+
+            #print("Month is",row.month)
+            #print("Date is",holiday.date)
+            #print("Event is",holiday.event)2
+            if(len(calendar)==0):
+                 response =  """
+                        {0}
+                    
+                        """.format("There are no holidays  ")
+                 reply = {"fulfillmentText": response}
+                 print("hi there")
+                 return jsonify(reply)
+            i = 0
+            Result=''
+            response=''
+            reply= ''
+            for row in calendar:
+
+                i = i + 1
+                print("print rows", row.id, row.month, row.date, row.event)
+
+                Result=  str(row.month) +str(row.date)  + str(row.event) + '  '  
+           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
+
+                print("result is", Result)
+                response = response + """
+                        {0}
+                    
+                        """.format(Result,)
+                
+                reply = {"fulfillmentText": response,}
+
+            return jsonify(reply)
+        else:
+
+    
+            response =  """
+                    Response : {0}
+                    """.format("action is not valid")
+            reply = {"fulfillmentText": response,}
+        #return jsonify(holiday.serialize())
+    except Exception as e:
+        return(str(e))
 
 
 #-------------------------------------------------Events---------------------------------------------------
@@ -445,11 +554,6 @@ def get_eve():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
-
-
-
-
-
 
 
 if __name__ == '__main__':
