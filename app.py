@@ -350,7 +350,7 @@ def add_timetable():
         except Exception as e:
             print("hujhjgjhg")
             return(str(e))
-    
+     return render_template("time_table.html")
 
 
 
@@ -365,9 +365,6 @@ def get_timetable():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
-@app.route("/get33")
-def test():
-    return render_template("time_table.html")
 
 @app.route("/add/syllabus",methods=['GET', 'POST'])
 def add_syllabus():
@@ -405,6 +402,8 @@ def get_syllabus():
     except Exception as e:
         return(str(e))
 
+
+#--------------------------------------calender--------------------------------------------------------#
 
 @app.route("/add/calendar",methods=['GET', 'POST'])
 def add_calendar():
