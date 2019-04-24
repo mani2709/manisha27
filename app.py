@@ -350,7 +350,7 @@ def add_timetable():
         except Exception as e:
             print("hujhjgjhg")
             return(str(e))
-     return render_template("time_table.html")
+        return render_template("time_table.html")
 
 
 
