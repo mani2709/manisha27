@@ -366,6 +366,72 @@ def get_timetable():
     except Exception as e:
         return(str(e))
 
+
+
+
+@app.route("/get3",methods=['GET', 'POST'] )
+def get3():
+    print("helloooo")
+
+    req = request.get_json(silent=True, force=True)
+    action = req['queryResult']['parameters']['function2']
+    course = req['queryResult']['parameters']['Courses']
+    sem_no = req['queryResult']['parameters']['sem_no']
+    branch = req['queryResult']['parameters']['Branch']
+    print("action is", action)
+    print("course is", course)
+   
+
+    try: 
+        if action== Timetable:
+            timetable= Timetable.query.filter_by(course=course , semester=semester, branch=branch).all()
+            
+            #holiday_count=Holiday.query.filter_by(month=month).count()
+            #print("count the holidays",holiday_count, len(holiday))
+
+            #print("Month is",row.month)
+            #print("Date is",holiday.date)
+            #print("Event is",holiday.event)
+            if(len(Timetable)==0):
+                 response =  """
+                        {0}
+                    
+                        """.format("Timetable updation is pending for now. Please check after some time")
+                 reply = {"fulfillmentText": response}
+                 #print("hi there")
+                 return jsonify(reply)
+            i = 0
+            Result=''
+            response=''
+            reply= ''
+            for row in Timetable:
+
+                i = i + 1
+                print("print rows", row.date, row.sub_code, row.subject)
+
+                Result=  str(row.monday) + str(row.tuesday) + str(row.wednesday) + '  '  
+           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
+
+                print("result is", Result)
+                response = response + """
+                        {0}
+                    
+                        """.format(Result,)
+                
+                reply = {"fulfillmentText": response,}
+
+            return jsonify(reply)
+        else:
+
+    
+            response =  """
+                    Response : {0}
+                    """.format("action is not valid")
+            reply = {"fulfillmentText": response,}
+        #return jsonify(holiday.serialize())
+    except Exception as e:
+        return(str(e))
+
 @app.route("/add/syllabus",methods=['GET', 'POST'])
 def add_syllabus():
     if request.method == 'POST':
