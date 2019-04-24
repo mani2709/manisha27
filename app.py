@@ -1,17 +1,10 @@
 import os
-from flask import Flask, request, jsonify, render_template
+from flask import Flask,session,redirect, url_for, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import extract
 import calendar
 from sqlalchemy import cast, DATE
-from models import Holiday
-from models import Student_Info
-from models import Schedule
-from models import Syllabus
-from models import Timetable
-from models import Event
-
 
 
 
@@ -22,7 +15,14 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+from models import Holiday
+from models import Student_Info
+from models import Schedule
+from models import Timetable
+from models import Syllabus
+from models import Calendar
 
+#from models import Holiday
 
 @app.route("/")
 def hello():
@@ -59,35 +59,21 @@ def get_all():
 @app.route("/get",methods=['GET', 'POST'] )
 def get_by_id():
     print("helloooo")
-
+    from models import Holiday
     req = request.get_json(silent=True, force=True)
     action = req['queryResult']['parameters']['function']
     month = req['queryResult']['parameters']['Months']
     print("action is", action)
-    print("month is", month)
-    #today_month = datetime.today().month
-    #print('today_month', today_month)
-    #months = Holiday.query.filter_by(extract('month', Holiday.datetime) == datetime.today().month.strftime("%B")).all()
-    #print("months is", months)
+    
 
-    #Payment.query.filter(extract('month', Payment.due_date) >= datetime.today().month,)
-
-    # start =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
-    # end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
     try: 
         if action=='Holiday':
-            holiday=Holiday.query.filter_by(start_date.strftime("%B") == month).all()
+            holiday=Holiday.query.filter_by(start_date = month).all()
+            print("holiday is", holiday)
             
             
-            #holiday_count=Holiday.query.filter_by(month=month).count()
-            #print("count the holidays",holiday_count, len(holiday))
-
-            #print("Month is",row.month)
-            #print("Date is",holiday.date)
-            #print("Event is",holiday.event)
             if(len(holiday)==0):
                  response =  """
-
                         {0}
                     
                         """.format("There are no holidays in month of "+ month)
@@ -101,14 +87,13 @@ def get_by_id():
             for row in holiday:
 
                 i = i + 1
-                print("print rows", row.id, row.month, row.date, row.event)
+                print("print rows", row.id, row.start_date, row.end_date, row.event)
 
-                Result= 'There is a holiday in the month of '+ str(row.month) + ' on'+str(row.date) + 'for the occasion ' + str(row.event) + '  '  
+                Result= 'There is a holiday in the month of '+ str(month) + ' on'+str(row.start_date) + 'for the occasion ' + str(row.event) + '  '  
            # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
 
                 print("result is", Result)
                 response = response + """
-
                         {0}
                     
                         """.format(Result,)
@@ -126,6 +111,7 @@ def get_by_id():
         #return jsonify(holiday.serialize())
     except Exception as e:
         return(str(e))
+
 
 @app.route("/add/form",methods=['GET', 'POST'])
 def add_book_form():
@@ -148,18 +134,18 @@ def add_book_form():
         except Exception as e:
             return(str(e))
     return render_template("getdata.html")
-
+    
 @app.route("/add/studentinfo",methods=['GET', 'POST'])
 def add_student_info():
     if request.method == 'POST':
         name=request.form.get('name')
-        registration_number=request.form.get('registration_number')
-        email=request.form.get('email')
+        address=request.form.get('address')
+        city=request.form.get('city')
         try:
             table=Student_Info(
                 name=name,
-                registration_number=registration_number,
-                email= email
+                address=address,
+                city=city
             )
             db.session.add(table)
             db.session.commit()
@@ -184,7 +170,8 @@ def get_data():
             print("All Students name -",row.name)
 
             print("All Students city -",row.city)
-            return render_template("list.html",All_Holidays = All_Holidays,All_Students = All_Students)
+
+        return render_template("list.html",All_Holidays = All_Holidays,All_Students = All_Students)
 
 
 
@@ -224,12 +211,12 @@ def get_by_name(name_):
 
 
         return(str(e))
-#----------------------------------------------------schedule---------------------------------------------------
+
 
 @app.route("/add/schedule",methods=['GET', 'POST'])
 def add_schedule():
     if request.method == 'POST':
-        course=request.form.get('course')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+        course=request.form.get('course')
         branch=request.form.get('branch')
         semester=request.form.get('semester')
         date=request.form.get('date')
@@ -251,7 +238,7 @@ def add_schedule():
             return(str(e))
     return render_template("exam.html")
 
-@app.route("/get/schedule")
+@app.route("/getschedule")
 def get_schedule():
     try:
         
@@ -262,45 +249,71 @@ def get_schedule():
     except Exception as e:
         return(str(e))
 
-#---------------------------------------------------syllabus-----------------------------------------------------
+@app.route("/get1",methods=['GET', 'POST'] )
+def get1():
+    print("helloooo")
 
-@app.route("/add/syllabus",methods=['GET', 'POST'])
-def add_syllabus():
-    if request.method == 'POST':
-        units= request.form.get('units')
-        course=request.form.get('course')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-        branch=request.form.get('branch')
-        semester=request.form.get('semester')
-        sub_code=request.form.get('sub_code')
-        subject=request.form.get('subject')
-        try:
-            data1=Syllabus(
-                units=units,
-                course=course,
-                branch=branch,
-                semester=semester,
-                sub_code=sub_code,
-                subject=subject
-            )
-            db.session.add(data1)
-            db.session.commit()
-            return "syllabus added. syllabus id={}".format(data1.id)
-        except Exception as e:
-            return(str(e))
-    return render_template("syllabus.html")
+    req = request.get_json(silent=True, force=True)
+    action = req['queryResult']['parameters']['function1']
+    course = req['queryResult']['parameters']['Courses']
+    sem_no = req['queryResult']['parameters']['sem_no']
+    branch = req['queryResult']['parameters']['Branch']
+    print("action is", action)
+    print("course is", course)
+   
 
-@app.route("/getsyllabus")
-def get_syllabus():
-    try:
-        
-        syllabus=Syllabus.query.all()
-        return render_template("list.html",syllabus = syllabus)
+    try: 
+        if action=='Exams_schedule.Exams_schedule-custom':
+            schedule=Schedule.query.filter_by(course=course , semester=sem_no, branch=branch).all()
+            
+            #holiday_count=Holiday.query.filter_by(month=month).count()
+            #print("count the holidays",holiday_count, len(holiday))
 
-        return  jsonify([e.serialize() for e in books])
+            #print("Month is",row.month)
+            #print("Date is",holiday.date)
+            #print("Event is",holiday.event)
+            if(len(schedule)==0):
+                 response =  """
+                        {0}
+                    
+                        """.format("Schedule updation is pending for now. Please check after some time")
+                 reply = {"fulfillmentText": response}
+                 #print("hi there")
+                 return jsonify(reply)
+            i = 0
+            Result=''
+            response=''
+            reply= ''
+            for row in schedule:
+
+                i = i + 1
+                print("print rows", row.date, row.sub_code, row.subject)
+
+                Result= 'There is a holiday in the month of '+ str(row.date) + ' on'+str(row.sub_code) + 'for the occasion ' + str(row.subject) + '  '  
+           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
+
+                print("result is", Result)
+                response = response + """
+                        {0}
+                    
+                        """.format(Result,)
+                
+                reply = {"fulfillmentText": response,}
+
+            return jsonify(reply)
+        else:
+
+    
+            response =  """
+                    Response : {0}
+                    """.format("action is not valid")
+            reply = {"fulfillmentText": response,}
+        #return jsonify(holiday.serialize())
     except Exception as e:
         return(str(e))
 
-#--------------------------------------------tym table----------------------------------------------------
+
+
 
 @app.route("/add/timetable",methods=['GET', 'POST'])
 def add_timetable():
@@ -341,6 +354,7 @@ def add_timetable():
 
 
 
+
 @app.route("/get/timetable")
 def get_timetable():
     try:
@@ -351,6 +365,50 @@ def get_timetable():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
+
+
+@app.route("/add/syllabus",methods=['GET', 'POST'])
+def add_syllabus():
+    if request.method == 'POST':
+        units= request.form.get('units')
+        course=request.form.get('course')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+        branch=request.form.get('branch')
+        semester=request.form.get('semester')
+        sub_code=request.form.get('sub_code')
+        subject=request.form.get('subject')
+        try:
+            data=Syllabus(
+                units=units,
+                course=course,
+                branch=branch,
+                semester=semester,
+                sub_code=sub_code,
+                subject=subject
+            )
+            db.session.add(data)
+            db.session.commit()
+            return "syllabus added. syllabus id={}".format(data.id)
+        except Exception as e:
+            return(str(e))
+    return render_template("syllabus.html")
+
+@app.route("/getsyllabus")
+def get_syllabus():
+    try:
+        
+        syllabus=Syllabus.query.all()
+        return render_template("list.html",syllabus = syllabus)
+
+        return  jsonify([e.serialize() for e in books])
+    except Exception as e:
+        return(str(e))
+
+
+
+                     
+
+
+
 
 #-------------------------------------------------Events---------------------------------------------------
 
