@@ -149,15 +149,16 @@
       </table>
 
 
-      
-          <H1>Events</H1>
+      <div class="container">
+    
+          <H1> Event </H1>
            <table border = 1>
       <thead>
       <td>start_date</td>
       <td>end_date</td>
       <td>Event</td>
    </thead>
-      {% for row in events %}
+      {% for row in holidays %}
             <tbody>
                <tr>
                <td>{{row["start_date"]}}</td>
@@ -167,6 +168,7 @@
          {% endfor %}
       </tbody>
       </table>
+        
      
     
    </body>

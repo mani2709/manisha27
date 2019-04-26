@@ -655,7 +655,7 @@ def get4():
 #-------------------------------------------------EVENTS---------------------------------------------------
 
 @app.route("/add/event",methods=['GET', 'POST'])
-def add_event():
+def add_book_form():
     if request.method == 'POST':
         
         start_date=request.form.get('start_date')
@@ -681,13 +681,12 @@ def add_event():
 def get_eve():
     try:
         
-        events = Event.query.all()
+        events=Event.query.all()
         return render_template("list.html",events = events)
 
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
-        return(str(e))
-
+        return(str(e))   
 
 
 if __name__ == '__main__':
