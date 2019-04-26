@@ -657,31 +657,31 @@ def get4():
 def add_event():
     if request.method == 'POST':
         
-        start_date =request.form.get('start_date')
-        end_date =request.form.get('end_date')
-        event =request.form.get('event')
+        start_date=request.form.get('start_date')
+        end_date=request.form.get('end_date')
+        event=request.form.get('event')
         try:
             events=Event(
     
-                start_date = start_date,
-                end_date = end_date,
-                event = event
+                start_date=start_date,
+                end_date=end_date,
+                event=event
             )
             
             db.session.add(events)
             db.session.commit()
             return "Event added. event id={}".format(events.id)
-             
         except Exception as e:
             return(str(e))
     return render_template("event.html")
 
-@app.route("/geteve")
-def get_eve():
+
+@app.route("/getevent")
+def get_event():
     try:
         
-        events = Event.query.all()
-        return render_template("list.html", events = events)
+        events=Event.query.all()
+        return render_template("list.html",events = events)
 
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
