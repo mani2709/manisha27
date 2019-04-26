@@ -185,10 +185,6 @@ class Timetable(db.Model):
 
 
 
-
-
- 
-
 class Calendar(db.Model):
     __tablename__ = 'calendar'
 

@@ -27,7 +27,7 @@ from models import Calendar
 
 @app.route("/")
 def hello():
-    return "Hello !"
+    return render_template(front.html)
 
 @app.route("/add")
 def add_holiday():
