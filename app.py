@@ -21,6 +21,7 @@ from models import Schedule
 from models import Timetable
 from models import Syllabus
 from models import Calendar
+from models import Event
 
 
 @app.route("/")
