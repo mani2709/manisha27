@@ -662,101 +662,31 @@ def add_event():
         end_date=request.form.get('end_date')
         event=request.form.get('event')
         try:
-            events=Event(
+            event1=Event(
     
                 start_date=start_date,
                 end_date=end_date,
                 event=event
             )
             
-            db.session.add(events)
+            db.session.add(event1)
             db.session.commit()
-            return "Event added. event id={}".format(events.id)
+            return "Event added. event id={}".format(event1.id)
         except Exception as e:
             return(str(e))
     return render_template("event.html")
 
 
-@app.route("/getevent")
-def get_event():
+@app.route("/geteve")
+def get_eve():
     try:
         
-        events=Event.query.all()
+        events = Event.query.all()
         return render_template("list.html",events = events)
 
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))
-
-@app.route("/get5",methods=['GET', 'POST'] )
-def get5():
-    print("helloooo")
-
-    req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['']
-    #month = req['queryResult']['parameters']['Months']
-    print("action is", action)
-    #print("month is", month)
-    #today_month = datetime.today().month
-    #print('today_month', today_month)
-    #months = Holiday.query.filter_by(extract('month', Holiday.datetime) == datetime.today().month.strftime("%B")).all()
-    #print("months is", months)
-
-    #Payment.query.filter(extract('month', Payment.due_date) >= datetime.today().month,)
-
-    #start =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
-    #end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
-
-    try: 
-        if action=='Academic calendar':
-            calendar=Calendar.query.all()
-            
-            #holiday_count=Holiday.query.filter_by(month=month).count()
-            #print("count the holidays",holiday_count, len(holiday))
-
-            #print("Month is",row.month)
-            #print("Date is",holiday.date)
-            #print("Event is",holiday.event)2
-            if(len(calendar)==0):
-                 response =  """
-                        {0}
-                    
-                        """.format("There are no holidays  ")
-                 reply = {"fulfillmentText": response}
-                 print("hi there")
-                 return jsonify(reply)
-            i = 0
-            Result=''
-            response=''
-            reply= ''
-            for row in calendar:
-
-                i = i + 1
-                print("print rows", row.id, row.month, row.date, row.event)
-
-                Result=  str(row.month) +str(row.date)  + str(row.event) + '  '  
-           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
-
-                print("result is", Result)
-                response = response + """
-                        {0}
-                    
-                        """.format(Result,)
-                
-                reply = {"fulfillmentText": response,}
-
-            return jsonify(reply)
-        else:
-
-    
-            response =  """
-                    Response : {0}
-                    """.format("action is not valid")
-            reply = {"fulfillmentText": response,}
-        #return jsonify(holiday.serialize())
-    except Exception as e:
-        return(str(e))
-
 
 
 
