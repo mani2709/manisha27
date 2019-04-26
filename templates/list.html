@@ -153,15 +153,15 @@
           <H1>Events</H1>
            <table border = 1>
       <thead>
-      <td>Month</td>
-      <td>Date</td>
+      <td>start_date</td>
+      <td>end_date</td>
       <td>Event</td>
    </thead>
       {% for row in events %}
             <tbody>
                <tr>
-               <td>{{row["Month"]}}</td>
-               <td>{{row["Date"]}}</td>
+               <td>{{row["start_date"]}}</td>
+               <td>{{row["end_date"]}}</td>
                <td> {{ row["Event"]}}</td>
               </tr>
          {% endfor %}
