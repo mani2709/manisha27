@@ -225,9 +225,9 @@ class Event(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     
-    start_date =  db.Column(db.String())
+    start_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-    end_date =db.Column(db.String())
+    end_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     event = db.Column(db.String())
 

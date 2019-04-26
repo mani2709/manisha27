@@ -658,19 +658,19 @@ def add_event():
     if request.method == 'POST':
         
         start_date =request.form.get('start_date')
-        end_date=request.form.get('end_date')
-        event=request.form.get('event')
+        end_date =request.form.get('end_date')
+        event =request.form.get('event')
         try:
-            event1=Event(
+            events=Event(
     
                 start_date = start_date,
                 end_date = end_date,
-                event=event
+                event = event
             )
             
-            db.session.add(event1)
+            db.session.add(events)
             db.session.commit()
-            return "event1 added. event1 id={}".format(event1.id)
+            return "Event added. event id={}".format(events.id)
              
         except Exception as e:
             return(str(e))
