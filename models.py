@@ -248,6 +248,7 @@ class Event(db.Model):
             'end_date': self.end_date,
             'event':self.event
         }
+        
 
 class Calendar(db.Model):
     __tablename__ = 'calendar'
