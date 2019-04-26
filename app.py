@@ -15,13 +15,14 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+from models import Event
 from models import Holiday
 from models import Student_Info
 from models import Schedule
 from models import Timetable
 from models import Syllabus
 from models import Calendar
-from models import Event
+
 
 
 @app.route("/")
@@ -677,8 +678,8 @@ def add_book_form():
     return render_template("event.html")
 
 
-@app.route("/geteve")
-def get_eve():
+@app.route("/getevent")
+def get_event():
     try:
         
         events=Event.query.all()
