@@ -656,7 +656,7 @@ def get4():
 #-------------------------------------------------EVENTS---------------------------------------------------
 
 @app.route("/add/event",methods=['GET', 'POST'])
-def add_book_form():
+def add_event():
     if request.method == 'POST':
         
         start_date=request.form.get('start_date')
