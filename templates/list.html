@@ -1,22 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <title>List of all data</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<div class="alert alert-success" role="alert">
+    <title>list of all modules</title>
+  </head>
+
+  <style>
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #f1f1f1;
+}
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+h1 {
+  text-align: center;  
+}
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.8;
+}
+#prevBtn {
+  background-color: #bbbbbb;
+}
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+.step.active {
+  opacity: 1;
+}
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+</style>
 <body>
+
    <div class="container">
     
           <H1> Holidays </H1>
+          <table class="table table-striped">
            <table border = 1>
       <thead>
+         <tr>
       <td>start_date</td>
       <td>end_date</td>
       <td>Event</td>
+   </tr>
    </thead>
       {% for row in holidays %}
             <tbody>
@@ -29,15 +104,15 @@
       </tbody>
       </table>
      
-     <div class="container">
       <H1>  Students_Info </H1>
+      <table class="table table-striped">
       <table border = 1>
          <thead>
-            
+            <tr>
             <td>Name</td>
             <td>Registration_number</td>
             <td>Email</td>
-            
+            </tr>
          </thead>
          
          
@@ -55,15 +130,17 @@
 
 
       <H1> Exam Schedule </H1>
+      <table class="table table-striped">
       <table border = 1>
          <thead>
+            <tr>
             <td>Course</td>
             <td>Branch</td>
             <td>Semester</td>
             <td>Date</td>
             <td>Sub_code</td>
             <td>Subject</td>
-            
+            </tr>
          </thead>
          
          {% for row in schedule %}
@@ -85,15 +162,17 @@
 
 
       <H1> Syllabus </H1>
+      <table class="table table-striped">
       <table border = 1>
          <thead>
+            <tr>
             <td>units</td>
             <td>Course</td>
             <td>Branch</td>
             <td>Semester</td>
             <td>Sub_code</td>
             <td>Subject</td>
-            
+            </tr>
          </thead>
          
          {% for row in syllabus %}
@@ -113,8 +192,10 @@
       </table>
 
       <H1> Timetable </H1>
+      <table class="table table-striped">
       <table border = 1>
          <thead>
+            <tr>
             <td>Course</td>
             <td>Branch</td>
             <td>Semester</td>
@@ -125,7 +206,7 @@
             <td>Thursday</td>
             <td>Friday</td>
             <td>Saturday</td>
-           
+           </tr>
          </thead>
          
          {% for row in timetable %}
@@ -151,11 +232,14 @@
 
    
           <H1> Event </H1>
+            <table class="table table-striped">
            <table border = 1>
       <thead>
+         <tr>
       <td>start_date</td>
       <td>end_date</td>
       <td>Event</td>
+   </tr>
    </thead>
       {% for row in events %}
             <tbody>
@@ -167,7 +251,7 @@
          {% endfor %}
       </tbody>
       </table>
-        
+ </div>       
      
     
    </body>
