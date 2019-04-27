@@ -414,7 +414,7 @@ def get2():
                 i = i + 1
                 #print("print rows", row.date, row.sub_code, row.subject)
 
-                Result=  str(row.timing) + ' ' + str(row.monday) + ' ' + str(row.tuesday) + '  '  
+                Result=  str(row.timing) + ' ' + str(row.monday) + ' ' + str(row.tuesday) + '  ' + str(row.wednesday) + ' ' + str(row.thursday) +' '+ str(row.friday) + ' ' + str(row.saturday) + ' '
            # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
 
                 print("result is", Result)
@@ -510,7 +510,7 @@ def get3():
             Result=''
             response=''
             reply= ''
-            for row in timetable:
+            for row in syllabus:
 
                 i = i + 1
                 #print("print rows", row.date, row.sub_code, row.subject)
@@ -688,6 +688,63 @@ def get_event():
         return  jsonify([e.serialize() for e in books])
     except Exception as e:
         return(str(e))   
+
+
+@app.route("/get5",methods=['GET', 'POST'] )
+def get5():
+req = request.get_json(silent=True, force=True)
+    action = req['queryResult']['parameters']['event']
+    month = req['queryResult']['parameters']['Months']
+    print("action is", action)
+    
+
+    try: 
+        if action=='Event':
+            event=Event.query.filter_by(start_date = month).all()
+         
+            
+            
+            if(len(event)==0):
+                 response =  """
+                        {0}
+                    
+                        """.format("There are no events in month of "+ month)
+                 reply = {"fulfillmentText": response}
+                 print("hi there")
+                 return jsonify(reply)
+            i = 0
+            Result=''
+            response=''
+            reply= ''
+            for row in event:
+
+                i = i + 1
+                print("print rows", row.id, row.start_date, row.end_date, row.event)
+
+                Result= 'There is a event in the month of '+ str(month) + ' on'+str(row.start_date) + '  '  
+           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
+
+                print("result is", Result)
+                response = response + """
+                        {0}
+                    
+                        """.format(Result,)
+                
+                reply = {"fulfillmentText": response,}
+
+            return jsonify(reply)
+        else:
+
+    
+            response =  """
+                    Response : {0}
+                    """.format("action is not valid")
+            reply = {"fulfillmentText": response,}
+        #return jsonify(holiday.serialize())
+    except Exception as e:
+        return(str(e))
+
+
 
 
 if __name__ == '__main__':
