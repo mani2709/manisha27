@@ -693,7 +693,7 @@ def get_event():
 @app.route("/get5",methods=['GET', 'POST'] )
 def get5():
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['event']
+    action = req['queryResult']['parameters']['function3']
     month = req['queryResult']['parameters']['Months']
 
     
