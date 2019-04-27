@@ -716,12 +716,12 @@ def get5():
             Result=''
             response=''
             reply= ''
-            for row in events:
+            for row in event:
 
                 i = i + 1
                 print("print rows", row.id, row.start_date, row.end_date, row.event)
 
-                Result= 'There is a event in the month of '+ str(month) + ' on'+str(row.start_date) + ' ' + str(row.event) + '  '  
+                Result= 'There is a event in the month of '+ str(month) + ' on'+str(row.start_date) + ' ' + str(row.event) +sub_code` '  '  
            # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
 
                 print("result is", Result)
