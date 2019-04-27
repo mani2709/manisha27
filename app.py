@@ -692,10 +692,10 @@ def get_event():
 
 @app.route("/get5",methods=['GET', 'POST'] )
 def get5():
-req = request.get_json(silent=True, force=True)
+    req = request.get_json(silent=True, force=True)
     action = req['queryResult']['parameters']['event']
     month = req['queryResult']['parameters']['Months']
-    print("action is", action)
+
     
 
     try: 
@@ -716,7 +716,7 @@ req = request.get_json(silent=True, force=True)
             Result=''
             response=''
             reply= ''
-            for row in event:
+            for row in events:
 
                 i = i + 1
                 print("print rows", row.id, row.start_date, row.end_date, row.event)
