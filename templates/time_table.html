@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="alert alert-success" role="alert">
-    <title>Syllabus</title>
+    <title>Time Table</title>
   </head>
 
 <style>
@@ -129,7 +129,7 @@ button:hover {
   </div>
 </nav>
 
-<form id="regForm" action="/add/timetable" method="post">
+<form id="regForm" action="/add/timetable" method="post" class="was-validated">
   <h1>course details</h1>
   <!-- One "tab" for each step in the form: -->
   <div class="form-group">
@@ -137,7 +137,7 @@ button:hover {
                 <div class="row">
                       <div class="col-sm-6">
                               <label for="course">course</label>
-                              <input list="course"  class="form-control"placeholder="course" name="course">
+                              <input list="course"  class="form-control"placeholder="course" name="course" required>
                                   <datalist id="course">
                                     <option value="BCA">
                                     <option value="B.Tech">
@@ -151,7 +151,7 @@ button:hover {
 
                       <div class="col-sm-6">  
                                  <label for="branch">branch</label>
-                                 <input list="branch" class="form-control" placeholder="branch" name="branch" required="">
+                                 <input list="branch" class="form-control" placeholder="branch" name="branch" required>
                                         <datalist id="branch">
                                         <option value="Electrical">
                                         <option value="Electronics">
@@ -169,7 +169,7 @@ button:hover {
                 <div class="row">
                       <div class="col-sm-6">
                               <label for="semester">semester</label>
-                                <input list="semester" class="form-control" placeholder="semester" name="semester" required="">
+                                <input list="semester" class="form-control" placeholder="semester" name="semester" required>
                                 <datalist id="semester">
                                     <option>I</option>
                                     <option>II</option>
@@ -187,9 +187,13 @@ button:hover {
 
                        <div class="col-sm-6">
                             <label for="timing">timing</label>
-                            <input class="form-control " type="text" class="form-control" placeholder="timing" id="timing" name="timing" required="">
+                            <input class="form-control " type="text" class="form-control" placeholder="timing" id="timing" name="timing" required>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
                       </div>
                 </div>
+                <br>
+                <br>
 
        <div class="row">
             <div class="col-sm-3">                   
@@ -197,18 +201,23 @@ button:hover {
                  <input class="form-control " type="text" placeholder="monday" id="monday" name="monday">
             </div>
 
+            <br>
+            <br>
+
             <div class="col-sm-3">
                  <label for="tuesday">Tuesday</label>
                  <input class="form-control " type="text" placeholder="tuesday" id="tuesday" name="tuesday">
             </div>
-
+            <br>
+            <br>
 
             <div class="col-sm-3">
                  <label for="wednesday">Wednesday</label>
                  <input class="form-control " type="text" placeholder="wednesday" id="wednesday" name="wednesday">
             </div>
         </div>    
-
+        <br>
+        <br>
     
 
        <div class="row">
@@ -216,20 +225,25 @@ button:hover {
                 <label for="thursday">Thursday</label>
                 <input class="form-control " type="text" placeholder="thursday" id="thursday" name="thursday">
             </div>
-
+            <br>
+            <br>
 
             <div class="col-sm-3">  
                   <label for="friday">Friday</label>
                   <input class="form-control " type="text" placeholder="friday" id="friday" name="friday"> 
              </div> 
-
+             <br>
+             <br>
 
             <div class="col-sm-3">
                  <label for="saturday">Saturday</label>
                  <input class="form-control " type="text" placeholder="saturday" id="saturday" name="saturday">
             </div>                              
         </div>
-  <button type="submit " class="btn btn-primary " style="float:centre ">Submit</button>
+
+        <br>
+        <br>
+  <button type="submit " class="btn btn-primary " style="float:right; ">Submit</button>
 </option>
 </form>
   
