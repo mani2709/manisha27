@@ -32,7 +32,7 @@ def hello():
 @app.route("/action",methods=['GET', 'POST'] )
 def getaction():
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['action']
+    action = req['queryResult']['parameters']['function']
     print("action is",action)
     response =  """                        Response : {0}
                         """.format("action is not valid")
