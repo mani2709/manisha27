@@ -709,7 +709,7 @@ def get5():
     try: 
 
         #if action=='Event':
-            event = Event.filter(extract('month', Event.due_date) >= datetime.today().month).all()
+            event = Event.filter_by(extract('month', Event.due_date) >= datetime.today().month).all()
            # event=Event.query.filter_by(start_date.month = month).all()
             print("event is", event)
          
