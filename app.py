@@ -37,24 +37,24 @@ def getaction():
 
 try:
     if action == 'Holiday':
-        get():
+        get()
     
 
     if action == 'Exams_schedule':
-        get1():
+        get1()
 
     if action == 'Timetable':
-        get2():
+        get2()
 
     if action == 'Syllabus':
-       get3():
+       get3()
 
     if action == 'Academic_Calendar':
-       get4():
+       get4()
 
 
     if action== 'Event':
-       get5():
+       get5()
 
 
 except Exception as e:
