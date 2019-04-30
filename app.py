@@ -30,7 +30,7 @@ def hello():
     return render_template("front.html")
 
 @app.route("/action",methods=['GET', 'POST'] )
-def act():
+def get_action():
     req = request.get_json(silent=True, force=True)
     action = req['queryResult']['parameters']['function1']
 
