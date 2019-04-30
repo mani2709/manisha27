@@ -50,7 +50,7 @@ try:
         return("fulfillmentText": Syllabus(function1, course, sem_no , branch))
 
     if action == get4():
-        return("fulfillmentText": Academic Calendar(function1))
+        return("fulfillmentText": Academic_Calendar(function1))
 
     if action== get5():
         return("fulfillmentText": Event(function1,month))
@@ -601,7 +601,7 @@ def get4():
     #end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
 
     try: 
-        if action=='Academic calendar':
+        if action=='Academic_Calendar':
             calendar=Calendar.query.all()
             
             #holiday_count=Holiday.query.filter_by(month=month).count()
