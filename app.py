@@ -30,7 +30,7 @@ def hello():
     return render_template("front.html")
 
 @app.route("/action",methods=['GET', 'POST'] )
-def get_action():
+def getaction():
     req = request.get_json(silent=True, force=True)
     action = req['queryResult']['parameters']['function1']
 
@@ -97,6 +97,7 @@ def get_all():
     except Exception as e:
         return(str(e))
 
+@app.route("get",methods=['GET', 'POST'])
 def get():
     print("helloooo")
     from models import Holiday
