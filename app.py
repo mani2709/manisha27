@@ -33,6 +33,10 @@ def hello():
 def getaction():
     req = request.get_json(silent=True, force=True)
     action = req['queryResult']['parameters']['action']
+    print("action is",action)
+    response =  """                        Response : {0}
+                        """.format("action is not valid")
+    reply = {"fulfillmentText": response,}
 
 
     try:
@@ -59,9 +63,10 @@ def getaction():
            reply = get5()
 
 
+
     except Exception as e:
         response =  """                        Response : {0}
-                        """.format("action is not valid")
+                        """.format("An application error has occured")
         reply = {"fulfillmentText": response,}
     finally:    
         return jsonify(reply)
