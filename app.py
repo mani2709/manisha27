@@ -697,12 +697,15 @@ def get5():
     req = request.get_json(silent=True, force=True)
     #action = req['queryResult']['parameters']['function3']
     month = req['queryResult']['parameters']['Months']
+    print("month is", month)
 
     
 
     try: 
+
         #if action=='Event':
             event=Event.query.filter_by(start_date = month).all()
+            print("event is", event)
          
             
             
