@@ -734,9 +734,10 @@ def get5():
                     
                         """.format(Result,)
                 
-                reply = {"fulfillmentText": response,}
-
-        return jsonify(reply)
+            reply = {"fulfillmentText": response,}
+            print(reply)
+            return jsonify(reply)
+            print("event")
     except Exception as e:
         return(str(e))
        
