@@ -61,6 +61,7 @@ def getaction():
         if action== 'Event':
            print("action is event")
            reply = get5()
+           print("reply",reply)
 
 
 
