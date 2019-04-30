@@ -56,13 +56,14 @@ def getaction():
 
         if action== 'Event':
            print("action is event")
-           get5()
+           reply = get5()
 
 
     except Exception as e:
         response =  """                        Response : {0}
                         """.format("action is not valid")
         reply = {"fulfillmentText": response,}
+    finally:    
         return jsonify(reply)
         # return(str(e))
 
@@ -736,7 +737,7 @@ def get5():
                 
             reply = {"fulfillmentText": response,}
             print(reply)
-            return jsonify(reply)
+            return reply
             print("event")
     except Exception as e:
         return(str(e))
