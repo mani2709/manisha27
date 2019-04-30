@@ -690,7 +690,7 @@ def get_event():
     except Exception as e:
         return(str(e))   
 
-print("hloooo")
+#print("hloooo")
 @app.route("/get5",methods=['GET', 'POST'] )
 def get5():
     req = request.get_json(silent=True, force=True)
@@ -736,7 +736,7 @@ def get5():
                 
                 reply = {"fulfillmentText": response,}
 
-            return jsonify(reply)
+        return jsonify(reply)
     except Exception as e:
         return(str(e))
        
