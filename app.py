@@ -37,6 +37,7 @@ def getaction():
 
     try:
         if action == 'Holiday':
+
             get()
         
 
@@ -54,6 +55,7 @@ def getaction():
 
 
         if action== 'Event':
+           print("action is event")
            get5()
 
 
@@ -693,13 +695,13 @@ def get_event():
 @app.route("/get5",methods=['GET', 'POST'] )
 def get5():
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['function3']
+    #action = req['queryResult']['parameters']['function3']
     month = req['queryResult']['parameters']['Months']
 
     
 
     try: 
-        if action=='Event':
+        #if action=='Event':
             event=Event.query.filter_by(start_date = month).all()
          
             
