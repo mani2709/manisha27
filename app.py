@@ -41,24 +41,23 @@ def getaction():
 
     try:
         if action == 'Holiday':
-
-            get()
+            reply = get()
         
 
         if action == 'Exams_schedule':
-            get1()
+            reply = get1()
 
         if action == 'Timetable':
-            get2()
+            reply = get2()
 
         if action == 'Syllabus':
-           get3()
+           reply = get3()
 
         if action == 'Academic_Calendar':
-           get4()
+           reply = get4()
 
 
-        if action== 'Event':
+        if action == 'Event':
            print("action is event")
            reply = get5()
            print("reply",reply)
@@ -710,7 +709,8 @@ def get5():
     try: 
 
         #if action=='Event':
-            event=Event.query.filter_by(start_date = month).all()
+            event = Event.filter(extract('month', Event.due_date) >= datetime.today().month).all()
+           # event=Event.query.filter_by(start_date.month = month).all()
             print("event is", event)
          
             
