@@ -36,23 +36,24 @@ req = request.get_json(silent=True, force=True)
 action = req['queryResult']['parameters']['function1']
 
 
-if action == get():
-    return("fulfillmentText": holiday(function1,month))
+try:
+    if action == get():
+        return("fulfillmentText": holiday(function1,month))
 
-if action== get1():
-    return("fulfillmentText": Exams_schedule.Exams_schedule-custom(function1, course,sem_no,branch))
+    if action== get1():
+        return("fulfillmentText": Exams_schedule.Exams_schedule-custom(function1, course,sem_no,branch))
 
-if action == get2():
-    return("fulfillmentText": Timetable(function1, course,sem_no,branch))
+    if action == get2():
+        return("fulfillmentText": Timetable(function1, course,sem_no,branch))
 
-if action == get3():
-     return("fulfillmentText": Syllabus(function1, course, sem_no , branch))
+    if action == get3():
+        return("fulfillmentText": Syllabus(function1, course, sem_no , branch))
 
-if action == get4():
-    return("fulfillmentText": Academic Calendar(function1))
+    if action == get4():
+        return("fulfillmentText": Academic Calendar(function1))
 
-if action== get5():
-    return("fulfillmentText": Event(function1,month))
+    if action== get5():
+        return("fulfillmentText": Event(function1,month))
 
 
 except Exception as e:
@@ -139,17 +140,7 @@ def get():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
-        else:
-
-    
-            response =  """
-                    Response : {0}
-                    """.format("action is not valid")
-            reply = {"fulfillmentText": response,}
-        #return jsonify(holiday.serialize())
-    except Exception as e:
-        return(str(e))
-
+        
 
 #----------------------------------------------HOLIDAY----------------------------------------------------------
 
@@ -341,18 +332,7 @@ def get1():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
-        else:
-
-    
-            response =  """
-                    Response : {0}
-                    """.format("action is not valid")
-            reply = {"fulfillmentText": response,}
         
-    except Exception as e:
-        return(str(e))
-
-
 #----------------------------------------------TIME TABLE-----------------------------------------------------
 
 @app.route("/add/timetable",methods=['GET', 'POST'])
@@ -463,17 +443,7 @@ def get2():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
-        else:
-
-    
-            response =  """
-                    Response : {0}
-                    """.format("action is not valid")
-            reply = {"fulfillmentText": response,}
-        #return jsonify(holiday.serialize())
-    except Exception as e:
-        return(str(e))
-
+       
 #---------------------------------------------SYLLABUS----------------------------------------------------------        
 
 @app.route("/add/syllabus",methods=['GET', 'POST'])
@@ -564,16 +534,7 @@ def get3():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
-        else:
-
-    
-            response =  """
-                    Response : {0}
-                    """.format("action is not valid")
-            reply = {"fulfillmentText": response,}
-        #return jsonify(holiday.serialize())
-    except Exception as e:
-        return(str(e))
+        
 
 #--------------------------------------CALENDER--------------------------------------------------------#
 
@@ -678,17 +639,7 @@ def get4():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
-        else:
-
-    
-            response =  """
-                    Response : {0}
-                    """.format("action is not valid")
-            reply = {"fulfillmentText": response,}
-        #return jsonify(holiday.serialize())
-    except Exception as e:
-        return(str(e))
-
+       
 
 #-------------------------------------------------EVENTS---------------------------------------------------
 
@@ -770,17 +721,7 @@ def get5():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
-        else:
-
-    
-            response =  """
-                    Response : {0}
-                    """.format("action is not valid")
-            reply = {"fulfillmentText": response,}
-        #return jsonify(holiday.serialize())
-    except Exception as e:
-        return(str(e))
-
+       
 
 
 
