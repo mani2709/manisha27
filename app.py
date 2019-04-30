@@ -40,7 +40,7 @@ try:
         get():
     
 
-    if action == 'Exams_schedule.Exams_schedule-custom':
+    if action == 'Exams_schedule':
         get1():
 
     if action == 'Timetable':
@@ -97,18 +97,18 @@ def get_all():
     except Exception as e:
         return(str(e))
 
-@app.route("get",methods=['GET', 'POST'])
+# @app.route("get",methods=['GET', 'POST'])
 def get():
     print("helloooo")
     from models import Holiday
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['function']
+    # action = req['queryResult']['parameters']['function']
     month = req['queryResult']['parameters']['Months']
     print("action is", action)
     
 
     try: 
-        if action=='Holiday':
+            #if action=='Holiday':
             holiday=Holiday.query.filter_by(start_date = month).all()
             print("holiday is", holiday)
             
@@ -303,7 +303,7 @@ def get1():
    
 
     try: 
-        if action=='Exams_schedule.Exams_schedule-custom':
+        if action=='Exams_schedule':
             schedule=Schedule.query.filter_by(course=course , semester=semester, branch=branch).all()
             
             if(len(schedule)==0):
