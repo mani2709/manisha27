@@ -29,6 +29,44 @@ from models import Calendar
 def hello():
     return render_template("front.html")
 
+@app.route("/action",methods=['GET', 'POST'] )
+def act():
+
+req = request.get_json(silent=True, force=True)
+action = req['queryResult']['parameters']['function1']
+
+
+if action == get():
+    return("fulfillmentText": holiday(function1,month))
+
+if action== get1():
+    return("fulfillmentText": Exams_schedule.Exams_schedule-custom(function1, course,sem_no,branch))
+
+if action == get2():
+    return("fulfillmentText": Timetable(function1, course,sem_no,branch))
+
+if action == get3():
+     return("fulfillmentText": Syllabus(function1, course, sem_no , branch))
+
+if action == get4():
+    return("fulfillmentText": Academic Calendar(function1))
+
+if action== get5():
+    return("fulfillmentText": Event(function1,month))
+
+
+except Exception as e:
+        response =  """
+                    Response : {0}
+                    """.format("action is not valid")
+        reply = {"fulfillmentText": response,}
+        return jsonify(reply)
+        return(str(e))
+
+
+
+
+
 @app.route("/add")
 def add_holiday():
     month=request.args.get('month')
@@ -57,8 +95,7 @@ def get_all():
     except Exception as e:
         return(str(e))
 
-@app.route("/get",methods=['GET', 'POST'] )
-def get_by_id():
+def get():
     print("helloooo")
     from models import Holiday
     req = request.get_json(silent=True, force=True)
