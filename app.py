@@ -36,23 +36,25 @@ def act():
 
 
 try:
-    if action == get():
-        return("fulfillmentText": holiday(function1,month))
+    if action == 'Holiday':
+        get():
+    
 
-    if action== get1():
-        return("fulfillmentText": Exams_schedule.Exams_schedule-custom(function1, course,sem_no,branch))
+    if action == 'Exams_schedule.Exams_schedule-custom':
+        get1():
 
-    if action == get2():
-        return("fulfillmentText": Timetable(function1, course,sem_no,branch))
+    if action == 'Timetable':
+        get2():
 
-    if action == get3():
-        return("fulfillmentText": Syllabus(function1, course, sem_no , branch))
+    if action == 'Syllabus':
+       get3():
 
-    if action == get4():
-        return("fulfillmentText": Academic_Calendar(function1))
+    if action == 'Academic_Calendar':
+       get4():
 
-    if action== get5():
-        return("fulfillmentText": Event(function1,month))
+
+    if action== 'Event':
+       get5():
 
 
 except Exception as e:
