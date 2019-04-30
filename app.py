@@ -35,35 +35,35 @@ def getaction():
     action = req['queryResult']['parameters']['function1']
 
 
-try:
-    if action == 'Holiday':
-        get()
-    
+    try:
+        if action == 'Holiday':
+            get()
+        
 
-    if action == 'Exams_schedule':
-        get1()
+        if action == 'Exams_schedule':
+            get1()
 
-    if action == 'Timetable':
-        get2()
+        if action == 'Timetable':
+            get2()
 
-    if action == 'Syllabus':
-       get3()
+        if action == 'Syllabus':
+           get3()
 
-    if action == 'Academic_Calendar':
-       get4()
-
-
-    if action== 'Event':
-       get5()
+        if action == 'Academic_Calendar':
+           get4()
 
 
-except Exception as e:
+        if action== 'Event':
+           get5()
+
+
+    except Exception as e:
         response =  """
-                    Response : {0}
-                    """.format("action is not valid")
+                        Response : {0}
+                        """.format("action is not valid")
         reply = {"fulfillmentText": response,}
         return jsonify(reply)
-        return(str(e))
+        # return(str(e))
 
 
 
@@ -142,6 +142,8 @@ def get():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
+    except Exception as e:
+        return(str(e))
         
 
 #----------------------------------------------HOLIDAY----------------------------------------------------------
@@ -334,6 +336,8 @@ def get1():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
+    except Exception as e:
+        return(str(e))
         
 #----------------------------------------------TIME TABLE-----------------------------------------------------
 
@@ -445,6 +449,8 @@ def get2():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
+    except Exception as e:
+        return(str(e))
        
 #---------------------------------------------SYLLABUS----------------------------------------------------------        
 
@@ -536,6 +542,8 @@ def get3():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
+    except Exception as e:
+        return(str(e))
         
 
 #--------------------------------------CALENDER--------------------------------------------------------#
@@ -641,6 +649,8 @@ def get4():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
+    except Exception as e:
+        return(str(e))
        
 
 #-------------------------------------------------EVENTS---------------------------------------------------
@@ -723,6 +733,8 @@ def get5():
                 reply = {"fulfillmentText": response,}
 
             return jsonify(reply)
+    except Exception as e:
+        return(str(e))
        
 
 
