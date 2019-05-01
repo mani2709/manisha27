@@ -33,10 +33,7 @@ def hello():
 def getaction():
     req = request.get_json(silent=True, force=True)
     action = req['queryResult']['parameters']['function']
-    print("action is",action)
-    response =  """                        Response : {0}
-                        """.format("action is not valid")
-    reply = {"fulfillmentText": response,}
+    
 
 
     try:
@@ -115,10 +112,10 @@ def get():
     req = request.get_json(silent=True, force=True)
     month = req['queryResult']['parameters']['Months']
     print("action is", action)
-    
+
     try: 
 
-
+        print('helloooo')
         holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
         if(len(holiday)==0):
             response =  """
