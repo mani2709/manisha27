@@ -33,21 +33,19 @@ def hello():
 def getaction():
     req = request.get_json(silent=True, force=True)
     action = req['queryResult']['action']
-    
-
-
     try:
+        
         if action == 'Holiday':
             reply = get()
         
 
-        if action == 'Exams_schedule':
+        if action == 'Exams_schedule.Exams_schedule-custom':
             reply = get1()
 
-        if action == 'Timetable':
+        if action == 'Timetable.Timetable-custom':
             reply = get2()
 
-        if action == 'Syllabus':
+        if action == 'Syllabus.Syllabus-custom':
            reply = get3()
 
         if action == 'Academic_Calendar':
