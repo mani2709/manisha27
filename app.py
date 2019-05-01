@@ -116,7 +116,7 @@ def get():
 
     try: 
             #if action=='Holiday':
-            holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
+            holiday = Holiday.query.filter(extract('month', Holiday.date) >= datetime.today().month).all()
             print("holiday is", holiday)
             
             
