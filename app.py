@@ -143,9 +143,8 @@ def get():
     
 
     try: 
-           
-            holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
-            print("holiday is", holiday)
+           holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
+           print("holiday is", holiday)
             
             
             if(len(holiday)==0):
@@ -164,10 +163,7 @@ def get():
 
                 i = i + 1
                 print("print rows", row.id, row.start_date, row.end_date, row.event)
-
-                Result= 'There is a holiday in the month of '+ str(month) + ' on'+str(row.start_date) + 'for the occasion ' + str(row.event) + '  '  
-           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
-
+                Result= 'There is a holiday in the month of '+ str(month) + ' on' + str(row.start_date) + 'for the occasion ' + str(row.event) + '  '  
                 print("result is", Result)
                 response = response + """
                         {0}
@@ -712,8 +708,8 @@ def get5():
 
         #if action=='Event':
             event = Event.query.filter(extract('month', Event.start_date) >= datetime.today().month).all()
-           # event=Event.query.filter_by(start_date.month = month).all()
-            print("event is", event)
+           
+          
          
             
             
