@@ -73,7 +73,7 @@ def getaction():
 #----------------------------------------------HOLIDAY----------------------------------------------------------
 
 @app.route("/add/form",methods=['GET', 'POST'])
-def add_book_form():    
+def add_form():    
     if request.method == 'POST':
         start_date=request.form.get('start_date')
         end_date=request.form.get('end_date')
@@ -112,20 +112,20 @@ def get():
     print("helloooo")
     from models import Holiday
     req = request.get_json(silent=True, force=True)
-    #action = req['queryResult']['parameters']['function']
     month = req['queryResult']['parameters']['Months']
     print("month is", month)
     
 
     try: 
 
+
         
         holiday=Holiday.query.filter(extract('month',Holiday.start_date) >= datetime.today().month).all()
-            #Event.query.filter(extract('month',Event.start_date) >= datetime.today().month).all()
         print("holiday is", holiday)
             
             
         if(len(holiday)==0):
+
 
             response =  """
                     {0}
@@ -134,11 +134,13 @@ def get():
             reply = {"fulfillmentText": response}
             print("hi there")
             return jsonify(reply)
+
         i = 0
         Result=''
         response=''
         reply= ''
         for row in holiday:
+            
 
             i = i + 1
             print("print rows", row.id, row.start_date, row.end_date, row.event)
@@ -154,7 +156,7 @@ def get():
                 
             reply = {"fulfillmentText": response,}
 
-            return jsonify(reply)
+            return reply
     except Exception as e:
         return(str(e))
 
