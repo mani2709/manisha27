@@ -32,7 +32,7 @@ def hello():
 @app.route("/action",methods=['GET', 'POST'] )
 def getaction():
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['function']
+    action = req['queryResult']['action']
     
 
 
@@ -55,9 +55,7 @@ def getaction():
 
 
         if action == 'Event':
-           print("action is event")
            reply = get5()
-           print("reply",reply)
 
 
 
@@ -213,46 +211,46 @@ def get1():
     print("helloooo")
 
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['function1']
     course = req['queryResult']['parameters']['Courses']
     sem_no = req['queryResult']['parameters']['sem_no']
     branch = req['queryResult']['parameters']['Branch']
-    print("action is", action)
-    print("course is", course)
+    
    
 
     try: 
-        if action=='Exams_schedule':
-            schedule=Schedule.query.filter_by(course=course , semester=semester, branch=branch).all()
-            
-            if(len(schedule)==0):
-                 response =  """
-                        {0}
+
+
+
+        schedule=Schedule.query.filter_by(course=course , semester=semester, branch=branch).all()
+        if(len(schedule)==0):
+
+            response =  """
+                    {0}
                     
-                        """.format("Schedule updation is pending for now. Please check after some time")
-                 reply = {"fulfillmentText": response}
-                 return jsonify(reply)
-            i = 0
-            Result=''
-            response=''
-            reply= ''
-            for row in schedule:
+                    """.format("Schedule updation is pending for now. Please check after some time")
+            reply = {"fulfillmentText": response}
+            return jsonify(reply)
+        i = 0
+        Result=''
+        response=''
+        reply= ''
+        for row in schedule:
 
-                i = i + 1
-                print("print rows", row.date, row.sub_code, row.subject)
+            i = i + 1
+            print("print rows", row.date, row.sub_code, row.subject)
 
-                Result= 'There is an exam in the month of '+ str(row.date) + ' of'+str(row.sub_code)  + '-' + str(row.subject) + '  '  
+            Result= 'There is an exam in the month of '+ str(row.date) + ' of'+str(row.sub_code)  + '-' + str(row.subject) + '  '  
            # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
 
-                print("result is", Result)
-                response = response + """
-                        {0}
+            print("result is", Result)
+            response = response + """
+                    {0}
                     
-                        """.format(Result,)
+                    """.format(Result,)
                 
-                reply = {"fulfillmentText": response,}
+            reply = {"fulfillmentText": response,}
 
-            return jsonify(reply)
+        return reply
     except Exception as e:
         return(str(e))
         
@@ -319,7 +317,6 @@ def get2():
     print("helloooo")
 
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['function2']
     course = req['queryResult']['parameters']['Courses']
     sem_no = req['queryResult']['parameters']['number']
     branch = req['queryResult']['parameters']['Branch']
@@ -327,45 +324,41 @@ def get2():
     print("course is", course)
    
 
-    try: 
-        if action== Timetable:
-            timetable= Timetable.query.filter_by(course=course , semester=semester, branch=branch).all()
-            
-            #holiday_count=Holiday.query.filter_by(month=month).count()
-            #print("count the holidays",holiday_count, len(holiday))
+    try:
 
-            #print("Month is",row.month)
-            #print("Date is",holiday.date)
-            #print("Event is",holiday.event)
-            if(len(timetable)==0):
-                 response =  """
-                        {0}
+
+
+        timetable= Timetable.query.filter_by(course=course , semester=semester, branch=branch).all()
+        if(len(timetable)==0):
+            response =  """
+                    {0}
                     
-                        """.format("Timetable updation is pending for now. Please check after some time")
-                 reply = {"fulfillmentText": response}
-                 #print("hi there")
-                 return jsonify(reply)
-            i = 0
-            Result=''
-            response=''
-            reply= ''
-            for row in timetable:
-
-                i = i + 1
-                #print("print rows", row.date, row.sub_code, row.subject)
-
-                Result=  str(row.timing) + ' ' + str(row.monday) + ' ' + str(row.tuesday) + '  ' + str(row.wednesday) + ' ' + str(row.thursday) +' '+ str(row.friday) + ' ' + str(row.saturday) + ' '
-           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
-
-                print("result is", Result)
-                response = response + """
-                        {0}
-                    
-                        """.format(Result,)
-                
-                reply = {"fulfillmentText": response,}
-
+                    """.format("Timetable updation is pending for now. Please check after some time")
+            reply = {"fulfillmentText": response}
             return jsonify(reply)
+        
+        i = 0
+        Result=''
+        response=''
+        reply= ''
+        for row in timetable:
+
+
+            i = i + 1
+               
+
+            Result=  str(row.timing) + ' ' + str(row.monday) + ' ' + str(row.tuesday) + '  ' + str(row.wednesday) + ' ' + str(row.thursday) +' '+ str(row.friday) + ' ' + str(row.saturday) + ' '
+           
+
+            print("result is", Result)
+            response = response + """
+                    {0}
+                    
+                    """.format(Result,)
+                
+            reply = {"fulfillmentText": response,}
+
+            return reply
     except Exception as e:
         return(str(e))
        
@@ -412,53 +405,43 @@ def get3():
     print("helloooo")
 
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['Syllabus']
+    #action = req['queryResult']['parameters']['Syllabus']
     course = req['queryResult']['parameters']['Courses']
     sem_no = req['queryResult']['parameters']['number']
     branch = req['queryResult']['parameters']['Branch']
-    print("action is", action)
+   
     print("course is", course)
    
 
-    try: 
-        if action== Syllabus:
-            syllabus = Syllabus.query.filter_by(course=course , semester=semester, branch=branch).all()
-            
-            #holiday_count=Holiday.query.filter_by(month=month).count()
-            #print("count the holidays",holiday_count, len(holiday))
+    try:
 
-            #print("Month is",row.month)
-            #print("Date is",holiday.date)
-            #print("Event is",holiday.event)
-            if(len(syllabus)==0):
-                 response =  """
-                        {0}
+        syllabus = Syllabus.query.filter_by(course=course , semester=semester, branch=branch).all()
+        if(len(syllabus)==0):
+            response =  """
+                    {0}
                     
-                        """.format("Syllabus updation is pending for now. Please check after some time")
-                 reply = {"fulfillmentText": response}
-                 #print("hi there")
-                 return jsonify(reply)
-            i = 0
-            Result=''
-            response=''
-            reply= ''
-            for row in syllabus:
-
-                i = i + 1
-                #print("print rows", row.date, row.sub_code, row.subject)
-
-                Result=  str(row.sub_code) + ' ' + str(row.subject) +' ' + str(row.units) + '  '  
-           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
-
-                print("result is", Result)
-                response = response + """
-                        {0}
-                    
-                        """.format(Result,)
+                    """.format("Syllabus updation is pending for now. Please check after some time")
+            reply = {"fulfillmentText": response}
                 
-                reply = {"fulfillmentText": response,}
-
             return jsonify(reply)
+        i = 0
+        Result=''
+        response=''
+        reply= ''
+        for row in syllabus:
+
+
+            i = i + 1
+            Result=  str(row.sub_code) + ' ' + str(row.subject) +' ' + str(row.units) + '  '  
+            print("result is", Result)
+            response = response + """
+                    {0}
+                    
+                    """.format(Result,)
+                
+            reply = {"fulfillmentText": response,}
+
+        return reply
     except Exception as e:
         return(str(e))
         
@@ -487,7 +470,7 @@ def add_calendar():
             session['message'] = message
             print("session is",session)
             return redirect(url_for('get_cal'))
-            #return render_template("list.html",calendar = calendar)
+           
 
             
         except Exception as e:
@@ -513,59 +496,35 @@ def get4():
     print("helloooo")
 
     req = request.get_json(silent=True, force=True)
-    action = req['queryResult']['parameters']['calendar']
-    #month = req['queryResult']['parameters']['Months']
-    print("action is", action)
-    #print("month is", month)
-    #today_month = datetime.today().month
-    #print('today_month', today_month)
-    #months = Holiday.query.filter_by(extract('month', Holiday.datetime) == datetime.today().month.strftime("%B")).all()
-    #print("months is", months)
+    
+    try:
 
-    #Payment.query.filter(extract('month', Payment.due_date) >= datetime.today().month,)
-
-    #start =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
-    #end   =datetime.strptime(request.vars.Expected_Possession_Date,"%Y-%m-%d").date()
-
-    try: 
-        if action=='Academic_Calendar':
-            calendar=Calendar.query.all()
-            
-            #holiday_count=Holiday.query.filter_by(month=month).count()
-            #print("count the holidays",holiday_count, len(holiday))
-
-            #print("Month is",row.month)
-            #print("Date is",holiday.date)
-            #print("Event is",holiday.event)2
-            if(len(calendar)==0):
-                 response =  """
-                        {0}
+        calendar=Calendar.query.all()
+        if(len(calendar)==0):
+            response =  """
+                    {0}
                     
-                        """.format("There are no holidays  ")
-                 reply = {"fulfillmentText": response}
-                 print("hi there")
-                 return jsonify(reply)
-            i = 0
-            Result=''
-            response=''
-            reply= ''
-            for row in calendar:
-
-                i = i + 1
-                print("print rows", row.id, row.month, row.date, row.event)
-
-                Result=  str(row.month) +str(row.date)  + str(row.event) + '  '  
-           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
-
-                print("result is", Result)
-                response = response + """
-                        {0}
-                    
-                        """.format(Result,)
-                
-                reply = {"fulfillmentText": response,}
-
+                     """.format("There are no holidays  ")
+            reply = {"fulfillmentText": response}
             return jsonify(reply)
+        i = 0
+        Result=''
+        response=''
+        reply= ''
+        for row in calendar:
+            i = i + 1
+            print("print rows", row.id, row.month, row.date, row.event)
+
+            Result=  str(row.month) +str(row.date)  + str(row.event) + '  '  
+          
+            print("result is", Result)
+            response = response + """
+                    {0}
+                    
+                     """.format(Result,)
+                
+            reply = {"fulfillmentText": response,}
+        return reply
     except Exception as e:
         return(str(e))
        
@@ -606,55 +565,47 @@ def get_event():
     except Exception as e:
         return(str(e))   
 
-#print("hloooo")
+
 @app.route("/get5",methods=['GET', 'POST'] )
 def get5():
     req = request.get_json(silent=True, force=True)
-    #action = req['queryResult']['parameters']['function3']
     month = req['queryResult']['parameters']['Months']
     print("month is", month)
 
     
 
-    try: 
+    try:
 
-        #if action=='Event':
-            event = Event.query.filter(extract('month', Event.start_date) >= datetime.today().month).all()
-           
-          
-         
-            
-            
-            if(len(event)==0):
-                 response =  """
-                        {0}
+        event = Event.query.filter(extract('month', Event.start_date) >= datetime.today().month).all()
+        if(len(event)==0):
+            response =  """
+                    {0}
                     
-                        """.format("There are no events in month of "+ month)
-                 reply = {"fulfillmentText": response}
-                 print("hi there")
-                 return jsonify(reply)
-            i = 0
-            Result=''
-            response=''
-            reply= ''
-            for row in event:
+                    """.format("There are no events in month of "+ month)
+            reply = {"fulfillmentText": response}
+            print("hi there")
+            return jsonify(reply)
+        i = 0
+        Result=''
+        response=''
+        reply= ''
+        for row in event:
 
-                i = i + 1
-                print("print rows", row.id, row.start_date, row.end_date, row.event)
+            i = i + 1
+            print("print rows", row.id, row.start_date, row.end_date, row.event)
 
-                Result= 'There is a event in the month of '+ str(month) + 'to'+str(row.start_date) + ' in account of ' + str(row.event) +'  '  
-           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
+            Result= 'There is a event in the month of '+ str(month) + 'to'+str(row.start_date) + ' in account of ' + str(row.event) +'  '  
 
-                print("result is", Result)
-                response = response + """
-                        {0}
+            print("result is", Result)
+            response = response + """
+                    {0}
                     
-                        """.format(Result,)
+                    """.format(Result,)
                 
             reply = {"fulfillmentText": response,}
-            print(reply)
-            return reply
-            print("event")
+    
+        return reply
+          
     except Exception as e:
         return(str(e))
        
