@@ -116,9 +116,8 @@ def get():
     month = req['queryResult']['parameters']['Months']
     print("action is", action)
     
-
     try: 
-        
+
 
         holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
         if(len(holiday)==0):
