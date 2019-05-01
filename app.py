@@ -140,7 +140,7 @@ def get():
         response=''
         reply= ''
         for row in holiday:
-            
+
 
             i = i + 1
             print("print rows", row.id, row.start_date, row.end_date, row.event)
@@ -156,7 +156,8 @@ def get():
                 
             reply = {"fulfillmentText": response,}
 
-            return reply
+        return reply
+
     except Exception as e:
         return(str(e))
 
