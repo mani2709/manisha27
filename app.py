@@ -161,64 +161,10 @@ def get():
 
 
 
-@app.route("/getdata")
-
-def get_data():
-
-    try:
-
-        All_Holidays=Holiday.query.all()
-
-        All_Students=Student_Info.query.all()
-
-        for row in All_Students:
-
-            print("All Students name -",row.name)
-
-            print("All Students city -",row.city)
-
-        return render_template("list.html",All_Holidays = All_Holidays,All_Students = All_Students)
 
 
 
-        #return  jsonify([e.serialize() for e in books])
-
-    except Exception as e:
-
-        return(str(e))
-
-
-
-
-
-@app.route("/get/<name_>" )
-
-def get_by_name(name_):
-
-    #req = request.get_json(silent=True, force=True)
-
-    #print("in comin grequest",req)
-
-    #action = req['queryResult']['parameters']['Holiday']
-
-    #month = req['queryResult']['parameters']['Months']
-
-    try:
-
-        table=Holiday.query.filter_by(name=name_).first()
-
-        print("print rows", table)
-
-        return (table)
-
-        #return jsonify(table.serialize())
-
-    except Exception as e:
-
-
-        return(str(e))
-
-
+@
 
 #-------------------------------------------------SCHEDULE--------------------------------------------------------
 
