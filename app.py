@@ -118,6 +118,7 @@ def get():
     
 
     try: 
+        
 
         holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
         if(len(holiday)==0):
