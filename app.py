@@ -73,27 +73,29 @@ def getaction():
 #----------------------------------------------HOLIDAY----------------------------------------------------------
 
 @app.route("/add/form",methods=['GET', 'POST'])
-def add_book_form():
+def add_book_form():    
     if request.method == 'POST':
-        
         start_date=request.form.get('start_date')
         end_date=request.form.get('end_date')
         event=request.form.get('event')
         try:
             holiday=Holiday(
-    
+        
                 start_date=start_date,
                 end_date=end_date,
                 event=event
             )
-            
+                
             db.session.add(holiday)
             db.session.commit()
             return "Holiday added. holiday id={}".format(holiday.id)
         except Exception as e:
+
             return(str(e))
     return render_template("getdata.html")
 
+
+        
 @app.route("/getall")
 def get_all():
     try:
@@ -105,65 +107,58 @@ def get_all():
     except Exception as e:
         return(str(e))
 
-
-
-@app.route("/get",methods=['GET', 'POST'])
+@app.route("/get",methods=['GET', 'POST'] )
 def get():
+    print("helloooo")
+    from models import Holiday
     req = request.get_json(silent=True, force=True)
+    #action = req['queryResult']['parameters']['function']
     month = req['queryResult']['parameters']['Months']
-    print("action is", action)
+    print("month is", month)
+    
 
     try: 
 
-        print('helloooo')
-        holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
+        
+        holiday=Holiday.query.filter(extract('month',Holiday.start_date) >= datetime.today().month).all()
+            #Event.query.filter(extract('month',Event.start_date) >= datetime.today().month).all()
+        print("holiday is", holiday)
+            
+            
         if(len(holiday)==0):
+
             response =  """
-                        {0}
+                    {0}
                     
-                        """.format("There are no holidays in month of "+ month)
+                    """.format("There are no holidays in month of "+ month)
             reply = {"fulfillmentText": response}
+            print("hi there")
             return jsonify(reply)
         i = 0
         Result=''
         response=''
         reply= ''
         for row in holiday:
+
             i = i + 1
             print("print rows", row.id, row.start_date, row.end_date, row.event)
-            Result= 'There is a holiday in the month of '+ str(month) + ' on' + str(row.start_date) + 'for the occasion ' + str(row.event) + '  '  
+
+            Result= 'There is a holiday in the month of '+ str(month) + ' from' +' '+str(row.start_date)+' ' + 'to'+ ' '+str(row.end_date) +' '+ 'for the occasion ' + str(row.event) + '  '  
+           # Result= 'Dear candidate there is one holiday in the month of {0}'.format(holiday.month)
+
             print("result is", Result)
             response = response + """
-                        {0}
+                    {0}
                     
-                        """.format(Result,)
+                    """.format(Result,)
                 
             reply = {"fulfillmentText": response,}
 
-            return jsonify(reply)
+            return reply
     except Exception as e:
         return(str(e))
 
-#-------------------------------------------STUDENT INFO--------------------------------------------------------
-    
-@app.route("/add/studentinfo",methods=['GET', 'POST'])
-def add_student_info():
-    if request.method == 'POST':
-        name=request.form.get('name')
-        address=request.form.get('address')
-        city=request.form.get('city')
-        try:
-            table=Student_Info(
-                name=name,
-                address=address,
-                city=city
-            )
-            db.session.add(table)
-            db.session.commit()
-            return "Info added. info id={}".format(table.id)
-        except Exception as e:
-            return(str(e))
-    return render_template("studentdata.html")
+
 
 
 @app.route("/getdata")
