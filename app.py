@@ -93,6 +93,35 @@ def add_holiday():
     except Exception as e:
         return(str(e))
         
+
+# @app.route("get",methods=['GET', 'POST'])
+
+        
+
+#----------------------------------------------HOLIDAY----------------------------------------------------------
+
+@app.route("/add/form",methods=['GET', 'POST'])
+def add_book_form():
+    if request.method == 'POST':
+        
+        start_date=request.form.get('start_date')
+        end_date=request.form.get('end_date')
+        event=request.form.get('event')
+        try:
+            holiday=Holiday(
+    
+                start_date=start_date,
+                end_date=end_date,
+                event=event
+            )
+            
+            db.session.add(holiday)
+            db.session.commit()
+            return "Holiday added. holiday id={}".format(holiday.id)
+        except Exception as e:
+            return(str(e))
+    return render_template("getdata.html")
+
 @app.route("/getall")
 def get_all():
     try:
@@ -104,19 +133,18 @@ def get_all():
     except Exception as e:
         return(str(e))
 
-# @app.route("get",methods=['GET', 'POST'])
+
+
+@app.route("/get",methods=['GET', 'POST'])
 def get():
-    print("helloooo")
-    from models import Holiday
     req = request.get_json(silent=True, force=True)
-    # action = req['queryResult']['parameters']['function']
     month = req['queryResult']['parameters']['Months']
     print("action is", action)
     
 
     try: 
-            #if action=='Holiday':
-            holiday = Holiday.query.filter(extract('month', Holiday.date) >= datetime.today().month).all()
+           
+            holiday = Holiday.query.filter(extract('month', Holiday.start_date) >= datetime.today().month).all()
             print("holiday is", holiday)
             
             
@@ -151,32 +179,6 @@ def get():
             return jsonify(reply)
     except Exception as e:
         return(str(e))
-        
-
-#----------------------------------------------HOLIDAY----------------------------------------------------------
-
-@app.route("/add/form",methods=['GET', 'POST'])
-def add_book_form():
-    if request.method == 'POST':
-        
-        start_date=request.form.get('start_date')
-        end_date=request.form.get('end_date')
-        event=request.form.get('event')
-        try:
-            holiday=Holiday(
-    
-                start_date=start_date,
-                end_date=end_date,
-                event=event
-            )
-            
-            db.session.add(holiday)
-            db.session.commit()
-            return "Holiday added. holiday id={}".format(holiday.id)
-        except Exception as e:
-            return(str(e))
-    return render_template("getdata.html")
-
 
 #-------------------------------------------STUDENT INFO--------------------------------------------------------
     
