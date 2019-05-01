@@ -70,31 +70,6 @@ def getaction():
         reply = {"fulfillmentText": response,}
     finally:    
         return jsonify(reply)
-        # return(str(e))
-
-
-
-
-
-@app.route("/add")
-def add_holiday():
-    month=request.args.get('month')
-    date=request.args.get('date')
-    event=request.args.get('event')
-    try:
-        holiday=Holiday(
-            month=month,
-            date=date,
-            event=event
-        )
-        db.session.add(holiday)
-        db.session.commit()
-        return "Holiday added. holiday id={}".format(holiday.id)
-    except Exception as e:
-        return(str(e))
-        
-
-# @app.route("get",methods=['GET', 'POST'])
 
         
 
