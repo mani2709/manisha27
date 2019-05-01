@@ -154,7 +154,7 @@ def get():
                 
             reply = {"fulfillmentText": response,}
 
-            return reply
+            return jsonify(reply)
     except Exception as e:
         return(str(e))
 
