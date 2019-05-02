@@ -106,7 +106,7 @@ def get_by_id():
             print("print rows", row.id, row.start_date, row.end_date, row.event)
 
             
-            Result= 'There is a holiday on ' +str(row.start_date) +' '+ 'for the occasion ' + str(row.event) + '  '  
+            Result= 'There is a holiday on ' +str(row.start_date) +' '+ 'for the occasion of ' + str(row.event) + '  '  
             print("result is", Result)
             response = response + """
                     {0}
@@ -624,7 +624,7 @@ def getevents():
             print("print rows", row.id, row.start_date, row.end_date, row.event)
             
 
-            Result= 'There is an event from' +' '+str(row.start_date) +' '+ 'to'+ ' '+str(row.end_date)+' '+'for the occasion '+' ' + str(row.event) + '  '  
+            Result= 'There is an event from' +' '+str(row.start_date) +' '+ 'to'+ ' '+str(row.end_date)+' '+'for the occasion of '+' ' + str(row.event) + '  '  
            
 
             print("result is", Result)
