@@ -193,7 +193,7 @@ def add_schedule():
             return "schedule added. schedule id={}".format(data.id)
         except Exception as e:
             return(str(e))
-    return render_template("exam1.html")
+    return render_template("exam.html")
 
 @app.route("/getschedule")
 def get_schedule():
@@ -294,7 +294,7 @@ def add_timetable():
         except Exception as e:
             print("hujhjgjhg")
             return(str(e))
-    return render_template("table.html")
+    return render_template("time_table.html")
 
 
 
